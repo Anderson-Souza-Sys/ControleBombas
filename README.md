@@ -1,4 +1,4 @@
-<h1>Projeto de Controel de Bombas de Combustível</h1>
+<h1>Projeto de Controle de Bombas de Combustível</h1>
 
 <h3>Projeto</h3>
 
