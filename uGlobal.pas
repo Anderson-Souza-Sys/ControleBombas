@@ -29,7 +29,7 @@ end;{type}
 const
   NOME_EMPRESA = 'Posto ABC';
   MAX_BOMBAS_TANQUE = 2;
-  IMPOSTO_COMBUSTIVEL = 13;// em porcentagem
+  IMPOSTO_COMBUSTIVEL = 13; // em porcentagem
   CHAVE_CRIPTOGRAFIA = 'stringparachave';
 
 var
