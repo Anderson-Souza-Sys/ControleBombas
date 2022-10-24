@@ -63,6 +63,12 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       Width = 718
       Height = 45
       BandType = btHeader
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = False
+      Borders.DrawRight = False
+      Borders.DrawBottom = True
+      Borders.FixedBottom = True
       object RLLabel1: TRLLabel
         Left = 3
         Top = 3
@@ -150,13 +156,19 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       Left = 38
       Top = 83
       Width = 718
-      Height = 46
+      Height = 26
       BandType = btColumnHeader
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = False
+      Borders.DrawRight = False
+      Borders.DrawBottom = True
+      Borders.FixedBottom = True
       object RLLabel3: TRLLabel
         Left = 419
-        Top = 24
+        Top = 4
         Width = 62
-        Height = 19
+        Height = 14
         Caption = 'Tanque'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -167,9 +179,9 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       end
       object RLLabel2: TRLLabel
         Left = 4
-        Top = 24
+        Top = 4
         Width = 80
-        Height = 19
+        Height = 14
         Caption = 'Data Hora'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -180,9 +192,9 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       end
       object RLLabel4: TRLLabel
         Left = 200
-        Top = 25
+        Top = 5
         Width = 48
-        Height = 19
+        Height = 14
         Caption = 'Litros'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -193,9 +205,9 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       end
       object RLLabel5: TRLLabel
         Left = 332
-        Top = 24
+        Top = 4
         Width = 44
-        Height = 19
+        Height = 14
         Caption = 'Valor'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -206,9 +218,9 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
       end
       object RLLabel6: TRLLabel
         Left = 378
-        Top = 24
+        Top = 4
         Width = 38
-        Height = 19
+        Height = 14
         Caption = 'Tipo'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
@@ -220,7 +232,7 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
     end
     object RLBand3: TRLBand
       Left = 38
-      Top = 129
+      Top = 109
       Width = 718
       Height = 26
       object RLDBText3: TRLDBText
@@ -305,10 +317,16 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
     end
     object RLBand4: TRLBand
       Left = 38
-      Top = 155
+      Top = 135
       Width = 718
-      Height = 40
+      Height = 30
       BandType = btFooter
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = True
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
+      Borders.FixedTop = True
       object RLDBResult1: TRLDBResult
         Left = 45
         Top = 6

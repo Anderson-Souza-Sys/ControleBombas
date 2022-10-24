@@ -63,6 +63,11 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Width = 718
       Height = 45
       BandType = btHeader
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = False
+      Borders.DrawRight = False
+      Borders.DrawBottom = True
       object RLLabel1: TRLLabel
         Left = 3
         Top = 3
@@ -152,6 +157,11 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Width = 718
       Height = 25
       BandType = btColumnHeader
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = False
+      Borders.DrawRight = False
+      Borders.DrawBottom = True
       object RLLabel2: TRLLabel
         Left = 4
         Top = 3
@@ -429,6 +439,11 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Width = 718
       Height = 28
       BandType = btFooter
+      Borders.Sides = sdCustom
+      Borders.DrawLeft = False
+      Borders.DrawTop = True
+      Borders.DrawRight = False
+      Borders.DrawBottom = False
       object RLDBResult1: TRLDBResult
         Left = 161
         Top = 6
