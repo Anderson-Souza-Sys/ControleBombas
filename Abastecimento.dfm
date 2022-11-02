@@ -5,7 +5,7 @@ object frmAbastecimento: TfrmAbastecimento
   BorderStyle = bsSingle
   Caption = 'Abastecimento'
   ClientHeight = 287
-  ClientWidth = 645
+  ClientWidth = 494
   Color = clBtnFace
   Font.Charset = DEFAULT_CHARSET
   Font.Color = clWindowText
@@ -47,7 +47,7 @@ object frmAbastecimento: TfrmAbastecimento
   end
   object Label3: TLabel
     Left = 19
-    Top = 216
+    Top = 152
     Width = 119
     Height = 16
     Caption = 'Litros a abastecer'
@@ -97,6 +97,32 @@ object frmAbastecimento: TfrmAbastecimento
     Font.Style = []
     ParentFont = False
   end
+  object Label5: TLabel
+    Left = 180
+    Top = 152
+    Width = 70
+    Height = 16
+    Caption = 'Valor Total'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
+  object lblValorTotal: TLabel
+    Left = 180
+    Top = 179
+    Width = 72
+    Height = 16
+    Caption = 'lblValorTotal'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clBlue
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ParentFont = False
+  end
   object cmbApelidoBomba: TComboBox
     Left = 19
     Top = 39
@@ -114,7 +140,7 @@ object frmAbastecimento: TfrmAbastecimento
   end
   object edtLitros: TEdit
     Left = 19
-    Top = 240
+    Top = 176
     Width = 135
     Height = 24
     Font.Charset = DEFAULT_CHARSET
@@ -129,7 +155,7 @@ object frmAbastecimento: TfrmAbastecimento
     OnKeyPress = edtLitrosKeyPress
   end
   object btnAbastecer: TBitBtn
-    Left = 208
+    Left = 19
     Top = 236
     Width = 80
     Height = 30
@@ -152,7 +178,7 @@ object frmAbastecimento: TfrmAbastecimento
     OnClick = btnAbastecerClick
   end
   object btnFechar: TBitBtn
-    Left = 544
+    Left = 219
     Top = 236
     Width = 80
     Height = 30

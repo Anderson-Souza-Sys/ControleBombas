@@ -97,7 +97,7 @@ object frmConfiguraBanco: TfrmConfiguraBanco
   end
   object btnTree: TBitBtn
     Left = 298
-    Top = 166
+    Top = 165
     Width = 25
     Height = 25
     Glyph.Data = {
@@ -121,7 +121,7 @@ object frmConfiguraBanco: TfrmConfiguraBanco
     Left = 16
     Top = 34
     Width = 306
-    Height = 49
+    Height = 52
     Caption = '  Tipo Conex'#227'o  '
     Columns = 2
     Font.Charset = DEFAULT_CHARSET
@@ -229,9 +229,24 @@ object frmConfiguraBanco: TfrmConfiguraBanco
     TabOrder = 7
     Text = ' 3050'
   end
-  object dialogOpenFile: TOpenTextFileDialog
-    DefaultExt = '*.FGB;*.GDB'
-    Left = 280
-    Top = 26
+  object FileOpenDialog1: TFileOpenDialog
+    DefaultExtension = '*.GDB;*.FDB'
+    FavoriteLinks = <>
+    FileTypes = <
+      item
+        DisplayName = 'Firebird'
+        FileMask = '*.fdb'
+      end
+      item
+        DisplayName = 'Interbase'
+        FileMask = '*.gdb'
+      end
+      item
+        DisplayName = 'Todos'
+        FileMask = '*.*'
+      end>
+    Options = []
+    Left = 272
+    Top = 48
   end
 end

@@ -7,6 +7,13 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.StdCtrls;
 
 type
+  TMainMenuHelper = class helper for TMainMenu
+  private
+  public
+    Procedure MudaSizeFont(tam : byte);
+  end;
+
+type
   TfrmPrincipal = class(TForm)
     stbPrincipal: TStatusBar;
     MainMenu1: TMainMenu;
@@ -196,6 +203,13 @@ begin
     Abort;
   End;{try}
   {$I+}
+end;{procedure}
+
+{ TMainMenuHelper }
+
+procedure TMainMenuHelper.MudaSizeFont(tam: byte);
+begin
+  Self.Tag := 1;
 end;{procedure}
 
 end.

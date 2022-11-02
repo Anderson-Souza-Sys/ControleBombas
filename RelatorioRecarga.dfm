@@ -110,25 +110,11 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
         BeforePrint = rlblDataHoraBeforePrint
       end
       object RLSystemInfo1: TRLSystemInfo
-        Left = 606
-        Top = 3
-        Width = 50
-        Height = 18
-        Alignment = taRightJustify
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -16
-        Font.Name = 'Arial'
-        Font.Style = []
-        Info = itPageNumber
-        ParentFont = False
-        Text = ''
-      end
-      object RLSystemInfo2: TRLSystemInfo
-        Left = 667
+        Left = 344
         Top = 3
         Width = 137
         Height = 18
+        Alignment = taRightJustify
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
@@ -137,19 +123,23 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
         Info = itLastPageNumber
         ParentFont = False
         Text = ''
+        BeforePrint = RLSystemInfo1BeforePrint
       end
-      object RLLabel10: TRLLabel
-        Left = 658
+      object RLSystemInfo2: TRLSystemInfo
+        Left = 604
         Top = 3
-        Width = 8
-        Height = 18
-        Caption = '/'
+        Width = 114
+        Height = 19
+        Alignment = taRightJustify
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -16
         Font.Name = 'Arial'
-        Font.Style = []
+        Font.Style = [fsBold]
+        Info = itPageNumber
         ParentFont = False
+        Text = ''
+        BeforePrint = RLSystemInfo2BeforePrint
       end
     end
     object RLBand2: TRLBand

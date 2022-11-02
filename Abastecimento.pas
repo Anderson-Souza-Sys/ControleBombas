@@ -18,6 +18,8 @@ type
     btnFechar: TBitBtn;
     Label4: TLabel;
     lblValorCombustivel: TLabel;
+    Label5: TLabel;
+    lblValorTotal: TLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure edtLitrosKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
@@ -58,6 +60,7 @@ begin
   Abastecimento.Destroy;
   cmbApelidoBomba.SetFocus;
   edtLitros.Text := '0,000';
+  lblValorTotal.Caption := '0,00';
 end;{procedure}
 
 procedure TfrmAbastecimento.btnFecharClick(Sender: TObject);
@@ -77,8 +80,14 @@ end;{procedure}
 
 
 procedure TfrmAbastecimento.edtLitrosExit(Sender: TObject);
+var
+  v1, v2 :  double;
+  s : string;
+  valores : Array[1..2] of String;
 begin
   edtLitros.Text := FormataValor(edtLitros.Text, 3);
+
+  lblValorTotal.Caption := MultiplicaDoisValoresStr([edtLitros.Text, lblValorCombustivel.Caption], 2, True);
 end;{procedure}
 
 procedure TfrmAbastecimento.edtLitrosKeyPress(Sender: TObject; var Key: Char);
@@ -96,6 +105,7 @@ procedure TfrmAbastecimento.FormShow(Sender: TObject);
 begin
   edtLitros.Text := '0,000';
   lblValorCombustivel.Caption := '0,00';
+  lblValorTotal.Caption := '0,00';
   lblTipoCombustivel.Caption := '';
 
   Bomba := TBombas.Create;

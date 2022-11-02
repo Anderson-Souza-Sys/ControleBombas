@@ -10,12 +10,18 @@ Function Pergunta(Frase : String) : Boolean;
 procedure Erro(Frase : String);
 procedure Alerta(Frase : String);
 function DataHora(Atualiza : Boolean = False) : TDateTime;
+Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 15) : String;
 Procedure KeyValor(var Key : Char);
 Procedure KeyNumero(var Key : Char);
-Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 10) : String;
 Function TextoParaValor(valor : String) : Double;
 Function Criptografa(texto : string; chave: string) : String;
 Function DesCriptografa(texto : string; chave : string) : String;
+Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+Function SomaValores(valores : Array of String) : Double; overload;
+Function SomaValores(valores : Array of Double; decimais : byte; moeda : boolean = false) : String; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String) : Double; overload;
+
 
 type
   TCFG = record
@@ -34,7 +40,7 @@ const
 
 var
  _path : string;
- hoje : TDateTime;
+ _hoje : TDateTime;
 
 implementation
 
@@ -53,6 +59,128 @@ begin
   result := texto;
 end;{function}
 
+Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+var
+  s : string;
+  v1, v2,
+  total : Double;
+Begin
+
+  try
+    s := StringReplace(valores[0], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+    v1 := StrToFloat(Trim(s));
+
+    s := StringReplace(valores[1], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+    v2 := StrToFloat(Trim(s));
+
+    total := v1* v2;
+  except
+    total := 0;
+    Erro('Falha na conversão de valores!');
+    Abort;
+  end;
+
+  if moeda then
+    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+  Else
+    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+End;{function}
+
+Function MultiplicaDoisValoresStr(valores : Array of String) : Double; overload;
+var
+  s : string;
+  v1, v2,
+  total : Double;
+Begin
+
+  try
+    s := StringReplace(valores[0], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+    v1 := StrToFloat(Trim(s));
+
+    s := StringReplace(valores[1], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+    v2 := StrToFloat(Trim(s));
+
+    total := v1* v2;
+  except
+    total := 0;
+    Erro('Falha na conversão de valores!');
+    Abort;
+  end;
+
+  result := total;
+End;{function}
+
+Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+var
+  i : Integer;
+  s : string;
+  total : Double;
+Begin
+  total := 0;
+
+  try
+    For i := 0 to Length(valores)-1 do
+    Begin
+       s := StringReplace(valores[i], '.', '', [rfReplaceAll, rfIgnoreCase]);
+       s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+       total := total + StrToFloat(Trim(s));
+    End;{for}
+  except
+    total := 0;
+    Erro('Falha na conversão de valores!');
+    Abort;
+  end;
+
+  if moeda then
+    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+  Else
+    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+End;{function}
+
+Function SomaValores(valores : Array of String) : double; overload;
+var
+  i : Integer;
+  s : string;
+  total : Double;
+Begin
+  total := 0;
+
+  try
+    For i := 0 to Length(valores)-1 do
+    Begin
+       s := StringReplace(valores[i], '.', '', [rfReplaceAll, rfIgnoreCase]);
+       s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
+       total := total + StrToFloat(Trim(s));
+    End;{for}
+  except
+    total := 0;
+    Erro('Falha na conversão de valores!');
+    Abort;
+  end;
+
+  result := total;
+End;{function}
+
+Function SomaValores(valores : Array of Double; decimais : byte; moeda : boolean = false) : string; overload;
+var
+  i : Integer;
+  total : Double;
+Begin
+  total := 0;
+
+  For i := 0 to Length(valores)-1 do
+    total := total + valores[i];{for}
+
+  if moeda then
+    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+  Else
+    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+End;{function}
+
 Procedure KeyValor(var Key : Char);
 Begin
   if not (((Ord(Key) >= 48) and (Ord(Key) <= 57)) or (Key = #44) or (Key = #46) or (Key = #8) or (Key = #26) or (Key = #26))  Then
@@ -65,7 +193,7 @@ Begin
     Key := #0;{if}
 End;{procedure}
 
-Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 10) : String;
+Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 15) : String;
 Begin
   try
     valor := StringReplace(valor, '.', '', [rfReplaceAll, rfIgnoreCase]);
@@ -116,14 +244,14 @@ End;{function}
 function DataHora(Atualiza : Boolean = False) : TDateTime;
 Begin
   Try
-    If (Atualiza) or (hoje < 44857) then // 44857 = 23/10/2022
+    If (Atualiza) or (_hoje < 44857) then // 44857 = 23/10/2022
     Begin
       dmPrincipal.qryDataHora.Open;
-      Hoje := dmPrincipal.qryDataHora.FieldByName('DataHora').AsDateTime;
+      _hoje := dmPrincipal.qryDataHora.FieldByName('DataHora').AsDateTime;
       dmPrincipal.qryDataHora.Close;
     End;{if}
   Finally
-    Result := Hoje;
+    Result := _hoje;
   End;{try}
 End;{function}
 

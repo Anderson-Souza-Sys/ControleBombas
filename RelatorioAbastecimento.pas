@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, RLReport, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.ComCtrls, classBomba, Vcl.Grids, Vcl.DBGrids;
+  Vcl.Buttons, Vcl.ComCtrls, classBomba;
 
 type
   TfrmRelatorioAbastecimento = class(TForm)
@@ -35,35 +35,34 @@ type
     rlblPeriodo: TRLLabel;
     rlblDataHora: TRLLabel;
     RLBand2: TRLBand;
-    RLBand3: TRLBand;
     RLLabel2: TRLLabel;
     RLLabel4: TRLLabel;
     RLLabel5: TRLLabel;
     RLLabel6: TRLLabel;
     RLLabel7: TRLLabel;
     RLLabel8: TRLLabel;
-    RLDBText3: TRLDBText;
-    RLDBText4: TRLDBText;
-    RLDBText5: TRLDBText;
-    RLDBText6: TRLDBText;
-    RLDBText7: TRLDBText;
-    RLDBText8: TRLDBText;
     RLBand4: TRLBand;
     RLDBResult1: TRLDBResult;
     RLLabel9: TRLLabel;
     RLSystemInfo1: TRLSystemInfo;
     RLSystemInfo2: TRLSystemInfo;
-    RLLabel10: TRLLabel;
     RLDBResult2: TRLDBResult;
     RLDBResult4: TRLDBResult;
     RLDBResult5: TRLDBResult;
-    RLDBText2: TRLDBText;
-    RLLabel11: TRLLabel;
-    RLDBText1: TRLDBText;
-    RLLabel3: TRLLabel;
     RLLabel12: TRLLabel;
-    RLDBText9: TRLDBText;
     qryAbastecimentoVALOR_COBRADO_LITRO: TFloatField;
+    RLGroup1: TRLGroup;
+    RLBand3: TRLBand;
+    RLDBText3: TRLDBText;
+    RLDBText4: TRLDBText;
+    RLDBText6: TRLDBText;
+    RLDBText7: TRLDBText;
+    RLDBText8: TRLDBText;
+    RLDBText9: TRLDBText;
+    RLDBText5: TRLDBText;
+    RLBand5: TRLBand;
+    RLDBText1: TRLDBText;
+    RLDBText2: TRLDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnGerarRelatorioClick(Sender: TObject);
@@ -72,6 +71,12 @@ type
     procedure rlblDataHoraBeforePrint(Sender: TObject; var AText: string;
       var PrintIt: Boolean);
     procedure btnFecharClick(Sender: TObject);
+    procedure RLSystemInfo1BeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
+    procedure RLSystemInfo2BeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
+    procedure RLDBText2BeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
   private
     { Private declarations }
   public
@@ -80,8 +85,8 @@ type
 
 var
   frmRelatorioAbastecimento: TfrmRelatorioAbastecimento;
-  Bomba : TBombas;
   dInicial, dFinal : TDateTime;
+  ultimaPagina : String;
 
 implementation
 
@@ -107,6 +112,7 @@ begin
   qryAbastecimento.ParamByName('pData_Final').AsDate := dFinal+1;
 
   qryAbastecimento.Open;
+  qryAbastecimento.First;
 
   If qryAbastecimento.RecordCount < 1 then
   Begin
@@ -146,7 +152,30 @@ end;{procedure}
 procedure TfrmRelatorioAbastecimento.rlblPeriodoBeforePrint(Sender: TObject;
   var AText: string; var PrintIt: Boolean);
 begin
-  AText := DateToStr(dInicial) +'  até  '+ DateToStr(dFinal);
+  AText := 'Período de  '+DateToStr(dInicial) +'  até  '+ DateToStr(dFinal);
+end;{procedure}
+
+procedure TfrmRelatorioAbastecimento.RLDBText2BeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  if AText = 'D' then
+    AText := 'Diesel'{}
+  Else
+  if AText = 'G' then
+    AText := 'Gasolina';{if}
+end;{procedure}
+
+procedure TfrmRelatorioAbastecimento.RLSystemInfo1BeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  ultimaPagina := AText;
+  PrintIt := False;
+end;{procedure}
+
+procedure TfrmRelatorioAbastecimento.RLSystemInfo2BeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  AText := 'Página  '+AText+'  /  '+ultimaPagina;
 end;{procedure}
 
 end.

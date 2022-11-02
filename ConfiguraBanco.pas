@@ -16,7 +16,6 @@ type
     edtUsuario: TEdit;
     edtSenha: TEdit;
     edtIP: TEdit;
-    dialogOpenFile: TOpenTextFileDialog;
     lblIP: TLabel;
     lblPorta: TLabel;
     lblUsuario: TLabel;
@@ -24,6 +23,7 @@ type
     btnOk: TBitBtn;
     edtPorta: TMaskEdit;
     Label2: TLabel;
+    FileOpenDialog1: TFileOpenDialog;
     procedure IPKeyPress(Sender: TObject; var Key: Char);
     procedure FormShow(Sender: TObject);
     procedure rgTipoConexaoClick(Sender: TObject);
@@ -47,8 +47,8 @@ uses uGlobal;
 
 procedure TfrmConfiguraBanco.btnTreeClick(Sender: TObject);
 begin
-  If dialogOpenFile.Execute Then
-    edtCaminho.Text := dialogOpenFile.FileName;{if}
+  If FileOpenDialog1.Execute {dialogOpenFile.Execute} Then
+    edtCaminho.Text := FileOpenDialog1.FileName;{if}
 end;{procedure}
 
 procedure TfrmConfiguraBanco.IPKeyPress(Sender: TObject; var Key: Char);
@@ -61,7 +61,7 @@ end;{procedure}
 
 procedure TfrmConfiguraBanco.FormShow(Sender: TObject);
 begin
-  dialogOpenFile.InitialDir := ExtractFilePath(Application.ExeName);
+  FileOpenDialog1.DefaultFolder := ExtractFilePath(Application.ExeName);
   edtCaminho.Text := '';
   edtIP.Text := '';
   edtUsuario.Text := '';

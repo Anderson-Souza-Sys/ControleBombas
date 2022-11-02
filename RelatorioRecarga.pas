@@ -39,7 +39,6 @@ type
     RLLabel9: TRLLabel;
     RLSystemInfo1: TRLSystemInfo;
     RLSystemInfo2: TRLSystemInfo;
-    RLLabel10: TRLLabel;
     RLDBResult2: TRLDBResult;
     qryRecargaDATA_HORA: TSQLTimeStampField;
     qryRecargaAPELIDO_TANQUE: TStringField;
@@ -57,6 +56,10 @@ type
     procedure rlblDataHoraBeforePrint(Sender: TObject; var AText: string;
       var PrintIt: Boolean);
     procedure btnFecharClick(Sender: TObject);
+    procedure RLSystemInfo1BeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
+    procedure RLSystemInfo2BeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
   private
     { Private declarations }
   public
@@ -65,8 +68,8 @@ type
 
 var
   frmRelatorioRecarga: TfrmRelatorioRecarga;
-  Bomba : TBombas;
   dInicial, dFinal : TDateTime;
+  ultimaPagina : string;
 
 implementation
 
@@ -131,7 +134,20 @@ end;{procedure}
 procedure TfrmRelatorioRecarga.rlblPeriodoBeforePrint(Sender: TObject;
   var AText: string; var PrintIt: Boolean);
 begin
-  AText := DateToStr(dInicial) +'  até  '+ DateToStr(dFinal);
+  AText := 'Período de  '+DateToStr(dInicial) +'  até  '+ DateToStr(dFinal);
+end;{procedure}
+
+procedure TfrmRelatorioRecarga.RLSystemInfo1BeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  ultimaPagina := AText;
+  PrintIt := False;
+end;{procedure}
+
+procedure TfrmRelatorioRecarga.RLSystemInfo2BeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  AText := 'Página  '+AText+'  /  '+ultimaPagina;
 end;{procedure}
 
 end.

@@ -18,12 +18,12 @@ inherited frmCadastroInheritable: TfrmCadastroInheritable
     object btnNovo: TBitBtn
       Left = 8
       Top = 6
-      Width = 80
+      Width = 90
       Height = 45
       Caption = '&Novo'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
+      Font.Color = clBlack
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Glyph.Data = {
@@ -46,14 +46,14 @@ inherited frmCadastroInheritable: TfrmCadastroInheritable
       OnClick = btnNovoClick
     end
     object btnGravar: TBitBtn
-      Left = 94
+      Left = 104
       Top = 6
-      Width = 80
+      Width = 90
       Height = 45
       Caption = '&Gravar'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
+      Font.Color = clBlack
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Glyph.Data = {
@@ -76,14 +76,14 @@ inherited frmCadastroInheritable: TfrmCadastroInheritable
       OnClick = btnGravarClick
     end
     object btnExcluir: TBitBtn
-      Left = 180
+      Left = 200
       Top = 6
-      Width = 80
+      Width = 90
       Height = 45
       Caption = 'E&xcluir'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
+      Font.Color = clBlack
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Glyph.Data = {
@@ -105,14 +105,14 @@ inherited frmCadastroInheritable: TfrmCadastroInheritable
       TabOrder = 2
     end
     object btnFechar: TBitBtn
-      Left = 266
+      Left = 296
       Top = 6
-      Width = 80
+      Width = 90
       Height = 45
       Caption = '&Fechar'
       Font.Charset = DEFAULT_CHARSET
-      Font.Color = clWindowText
-      Font.Height = -13
+      Font.Color = clBlack
+      Font.Height = -15
       Font.Name = 'Tahoma'
       Font.Style = []
       Glyph.Data = {

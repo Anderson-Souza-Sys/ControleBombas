@@ -26,7 +26,6 @@ procedure TfrmbaseInheritable.FormClose(Sender: TObject;
   var Action: TCloseAction);
 begin
   Action := caFree;
-  frmbaseInheritable := nil;
 end;
 
 end.

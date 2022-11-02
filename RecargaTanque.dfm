@@ -67,7 +67,13 @@ inherited frmRecargaTanque: TfrmRecargaTanque
       ExplicitWidth = 100
     end
     inherited btnExcluir: TBitBtn
+      Left = 210
       Visible = False
+      ExplicitLeft = 210
+    end
+    inherited btnFechar: TBitBtn
+      Left = 306
+      ExplicitLeft = 306
     end
   end
   object cmbApelidoTanque: TComboBox
