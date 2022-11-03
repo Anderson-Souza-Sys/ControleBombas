@@ -8,7 +8,7 @@ uses
   FireDAC.Stan.Param, FireDAC.Stan.Error, FireDAC.DatS, FireDAC.Phys.Intf,
   FireDAC.DApt.Intf, FireDAC.Stan.Async, FireDAC.DApt, Data.DB,
   FireDAC.Comp.DataSet, FireDAC.Comp.Client, RLReport, Vcl.StdCtrls,
-  Vcl.Buttons, Vcl.ComCtrls, classBomba;
+  Vcl.Buttons, Vcl.ComCtrls, classBomba, Vcl.ExtCtrls;
 
 type
   TfrmRelatorioAbastecimento = class(TForm)
@@ -51,7 +51,7 @@ type
     RLDBResult5: TRLDBResult;
     RLLabel12: TRLLabel;
     qryAbastecimentoVALOR_COBRADO_LITRO: TFloatField;
-    RLGroup1: TRLGroup;
+    RLGroupAgrupador: TRLGroup;
     RLBand3: TRLBand;
     RLDBText3: TRLDBText;
     RLDBText4: TRLDBText;
@@ -61,11 +61,15 @@ type
     RLDBText9: TRLDBText;
     RLDBText5: TRLDBText;
     RLBand5: TRLBand;
-    RLDBText1: TRLDBText;
-    RLDBText2: TRLDBText;
+    RLDB_ApelidoBomba: TRLDBText;
     RLBand6: TRLBand;
     RLDBResult3: TRLDBResult;
     RLLabel3: TRLLabel;
+    rgAgrupar: TRadioGroup;
+    qryAbastecimentoDATA: TDateField;
+    RLLabel10: TRLLabel;
+    RLDBText10: TRLDBText;
+    RLDB_Data: TRLDBText;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnGerarRelatorioClick(Sender: TObject);
@@ -80,6 +84,10 @@ type
       var PrintIt: Boolean);
     procedure RLDBText2BeforePrint(Sender: TObject; var AText: string;
       var PrintIt: Boolean);
+    procedure RLDB_DataBeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
+    procedure RLDB_ApelidoBombaBeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
   private
     { Private declarations }
   public
@@ -90,6 +98,7 @@ var
   frmRelatorioAbastecimento: TfrmRelatorioAbastecimento;
   dInicial, dFinal : TDateTime;
   ultimaPagina : String;
+  ordem : Integer;
 
 implementation
 
@@ -107,6 +116,44 @@ begin
   dInicial := StrToDate(DateToStr(dtpInicial.Date));
   dFinal := StrToDate(DateToStr(dtpFinal.Date));
   DataHora(True);
+
+  qryAbastecimento.SQL.Text :=
+    'select LANCAMENTO_ABASTECIMENTO.litros_abastecer, LANCAMENTO_ABASTECIMENTO.valor_cobrado AS valor_cobrado_litro, '+
+    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) AS valor_cobrado, '+
+    'cast(LANCAMENTO_ABASTECIMENTO.data_hora as date) as DATA, '+
+
+    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) *(lancamento_abastecimento.imposto_perc /100) as Valor_Imposto, '+
+    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) - (LANCAMENTO_ABASTECIMENTO.valor_cobrado *(lancamento_abastecimento.imposto_perc /100)) as Valor_Sem_Imp, '+
+    'LANCAMENTO_ABASTECIMENTO.imposto_perc, LANCAMENTO_ABASTECIMENTO.litros_abastecer, LANCAMENTO_ABASTECIMENTO.data_hora, '+
+
+    'Bombas.apelido_bomba,  Tanques.apelido_tanque, Tanques.Tipo_combustivel '+
+
+    'from LANCAMENTO_ABASTECIMENTO, Bombas, Tanques '+
+
+    'where lancamento_abastecimento.data_hora >= :pData_Inicial and lancamento_abastecimento.data_hora < :pData_Final and '+
+    'LANCAMENTO_ABASTECIMENTO.ID_BOMBA = Bombas.ID_Bomba and '+
+    'Bombas.id_Tanque = Tanques.id_tanque '+
+    'order by ';
+
+
+  case rgAgrupar.ItemIndex of
+    0 :
+    Begin
+      qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
+      'Bombas.apelido_bomba, lancamento_abastecimento.data_hora';
+
+      RLGroupAgrupador.DataFields := 'APELIDO_BOMBA';
+    End;
+    1 :
+    Begin
+      qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
+      'lancamento_abastecimento.data_hora, Bombas.apelido_bomba';
+
+      RLGroupAgrupador.DataFields := 'DATA';
+    End;
+  end;{case}
+
+  ordem := rgAgrupar.ItemIndex;
 
   if qryAbastecimento.Active then
     qryAbastecimento.Close;{if}
@@ -180,5 +227,23 @@ procedure TfrmRelatorioAbastecimento.RLSystemInfo2BeforePrint(Sender: TObject;
 begin
   AText := 'Página  '+AText+'  /  '+ultimaPagina;
 end;{procedure}
+
+procedure TfrmRelatorioAbastecimento.RLDB_ApelidoBombaBeforePrint(
+  Sender: TObject; var AText: string; var PrintIt: Boolean);
+begin
+  if ordem <> 0 then
+    PrintIt := False;{if}
+end;{procedure}
+
+
+procedure TfrmRelatorioAbastecimento.RLDB_DataBeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  AText := 'GRUPO:  '+AText;
+
+  if ordem <> 1 then
+    PrintIt := False;{if}
+end;{procedure}
+
 
 end.

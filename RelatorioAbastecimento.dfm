@@ -33,7 +33,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     ParentFont = False
   end
   object Label3: TLabel
-    Left = 145
+    Left = 153
     Top = 33
     Width = 22
     Height = 16
@@ -47,7 +47,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
   end
   object rlrAbastecimento: TRLReport
     Left = 8
-    Top = 60
+    Top = 124
     Width = 794
     Height = 1123
     Borders.Sides = sdCustom
@@ -265,6 +265,20 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         ParentFont = False
         Transparent = False
       end
+      object RLLabel10: TRLLabel
+        Left = 140
+        Top = 3
+        Width = 36
+        Height = 18
+        Caption = 'Tipo'
+        Font.Charset = DEFAULT_CHARSET
+        Font.Color = clBlack
+        Font.Height = -15
+        Font.Name = 'Arial'
+        Font.Style = [fsBold]
+        ParentFont = False
+        Transparent = False
+      end
     end
     object RLBand4: TRLBand
       Left = 38
@@ -365,7 +379,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Transparent = False
       end
     end
-    object RLGroup1: TRLGroup
+    object RLGroupAgrupador: TRLGroup
       Left = 38
       Top = 108
       Width = 718
@@ -516,6 +530,22 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           Text = ''
           Transparent = False
         end
+        object RLDBText10: TRLDBText
+          Left = 144
+          Top = 3
+          Width = 132
+          Height = 16
+          DataField = 'TIPO_COMBUSTIVEL'
+          DataSource = dsAbastecimento
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          ParentFont = False
+          Text = ''
+          Transparent = False
+        end
       end
       object RLBand5: TRLBand
         Left = 0
@@ -523,9 +553,9 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Width = 718
         Height = 24
         BandType = btColumnHeader
-        object RLDBText1: TRLDBText
-          Left = 102
-          Top = 5
+        object RLDB_ApelidoBomba: TRLDBText
+          Left = 0
+          Top = 3
           Width = 133
           Height = 18
           DataField = 'APELIDO_BOMBA'
@@ -538,24 +568,24 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           ParentFont = False
           Text = ''
           Transparent = False
+          BeforePrint = RLDB_ApelidoBombaBeforePrint
         end
-        object RLDBText2: TRLDBText
+        object RLDB_Data: TRLDBText
           Left = 0
-          Top = 5
-          Width = 100
-          Height = 16
-          AutoSize = False
-          DataField = 'TIPO_COMBUSTIVEL'
+          Top = 3
+          Width = 43
+          Height = 18
+          DataField = 'DATA'
           DataSource = dsAbastecimento
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
-          Font.Height = -16
+          Font.Height = -15
           Font.Name = 'Arial'
           Font.Style = [fsBold]
           ParentFont = False
           Text = ''
           Transparent = False
-          BeforePrint = RLDBText2BeforePrint
+          BeforePrint = RLDB_DataBeforePrint
         end
       end
       object RLBand6: TRLBand
@@ -583,7 +613,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           Transparent = False
         end
         object RLLabel3: TRLLabel
-          Left = 497
+          Left = 532
           Top = 4
           Width = 65
           Height = 16
@@ -608,7 +638,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     TabOrder = 1
   end
   object dtpFinal: TDateTimePicker
-    Left = 173
+    Left = 189
     Top = 30
     Width = 128
     Height = 24
@@ -623,8 +653,8 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     TabOrder = 2
   end
   object btnGerarRelatorio: TBitBtn
-    Left = 317
-    Top = 24
+    Left = 522
+    Top = 88
     Width = 85
     Height = 30
     Caption = 'Gerar'
@@ -652,8 +682,8 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     OnClick = btnGerarRelatorioClick
   end
   object btnFechar: TBitBtn
-    Left = 423
-    Top = 24
+    Left = 623
+    Top = 88
     Width = 85
     Height = 30
     Caption = '&Fechar'
@@ -680,6 +710,25 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     TabOrder = 4
     OnClick = btnFecharClick
   end
+  object rgAgrupar: TRadioGroup
+    Left = 8
+    Top = 63
+    Width = 500
+    Height = 57
+    Caption = '  Agrupar por  '
+    Columns = 4
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = []
+    ItemIndex = 0
+    Items.Strings = (
+      'Nome Bomba'
+      'Por Dia')
+    ParentFont = False
+    TabOrder = 5
+  end
   object qryAbastecimento: TFDQuery
     Connection = dmPrincipal.FDC
     SQL.Strings = (
@@ -689,6 +738,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       
         '  (LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIM' +
         'ENTO.litros_abastecer) AS valor_cobrado,'
+      '  cast(LANCAMENTO_ABASTECIMENTO.data_hora as date) as DATA,'
       ''
       
         '  (LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIM' +
@@ -795,6 +845,13 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       FieldName = 'VALOR_COBRADO_LITRO'
       Origin = 'VALOR_COBRADO'
       Required = True
+    end
+    object qryAbastecimentoDATA: TDateField
+      AutoGenerateValue = arDefault
+      FieldName = 'DATA'
+      Origin = '"DATA"'
+      ProviderFlags = []
+      ReadOnly = True
     end
   end
   object dsAbastecimento: TDataSource
