@@ -7,8 +7,8 @@ uses Sysutils, Forms, Windows, System.Classes, Vcl.StdCtrls;
 type
   TCampos = record
     ID_Tanque      : Integer;
-    Litros_Recarga: Double;
-    Data_Hota     : TDateTime;
+    Litros_Recarga : Double;
+    Data_Hota      : TDateTime;
 
 end;{type}
 
@@ -91,6 +91,11 @@ Begin
 
   Try
 
+    If Campos.Litros_Recarga <= 0 then
+    Begin
+      R := False;
+      Mensagem := 'Deve informar um valor válido para litros.';
+    End Else
     If not BuscaAtributos Then
     Begin
       R := False;

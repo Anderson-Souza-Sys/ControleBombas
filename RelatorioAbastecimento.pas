@@ -63,6 +63,9 @@ type
     RLBand5: TRLBand;
     RLDBText1: TRLDBText;
     RLDBText2: TRLDBText;
+    RLBand6: TRLBand;
+    RLDBResult3: TRLDBResult;
+    RLLabel3: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnGerarRelatorioClick(Sender: TObject);

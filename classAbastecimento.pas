@@ -100,6 +100,11 @@ Begin
 
   Try
 
+    If Campos.Litros_Abastecer <= 0 then
+    Begin
+      R := False;
+      Mensagem := 'Deve informar um valor válido para litros.';
+    End Else
     If not BuscaAtributos Then
     Begin
       R := False;

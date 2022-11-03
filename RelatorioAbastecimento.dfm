@@ -268,7 +268,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     end
     object RLBand4: TRLBand
       Left = 38
-      Top = 159
+      Top = 179
       Width = 718
       Height = 28
       BandType = btFooter
@@ -369,7 +369,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Left = 38
       Top = 108
       Width = 718
-      Height = 51
+      Height = 71
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
       Borders.DrawTop = True
@@ -388,7 +388,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Transparent = False
       object RLBand3: TRLBand
         Left = 0
-        Top = 26
+        Top = 25
         Width = 718
         Height = 23
         Transparent = False
@@ -521,7 +521,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Left = 0
         Top = 1
         Width = 718
-        Height = 25
+        Height = 24
         BandType = btColumnHeader
         object RLDBText1: TRLDBText
           Left = 102
@@ -556,6 +556,38 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           Text = ''
           Transparent = False
           BeforePrint = RLDBText2BeforePrint
+        end
+      end
+      object RLBand6: TRLBand
+        Left = 0
+        Top = 48
+        Width = 718
+        Height = 24
+        BandType = btColumnFooter
+        object RLDBResult3: TRLDBResult
+          Left = 564
+          Top = 4
+          Width = 153
+          Height = 16
+          Alignment = taRightJustify
+          DataField = 'VALOR_SEM_IMP'
+          DataSource = dsAbastecimento
+          Font.Charset = ANSI_CHARSET
+          Font.Color = clBlack
+          Font.Height = -13
+          Font.Name = 'Arial'
+          Font.Style = []
+          Info = riSum
+          ParentFont = False
+          Text = ''
+          Transparent = False
+        end
+        object RLLabel3: TRLLabel
+          Left = 497
+          Top = 4
+          Width = 65
+          Height = 16
+          Caption = 'Sub Total'
         end
       end
     end
