@@ -205,6 +205,7 @@ Begin
   End;{do}
 
   dmPrincipal.qryTanque.Close;
+  combo.ItemIndex := 0;
 End;{procedure}
 
 Function TTanques.Atualizar : Boolean;

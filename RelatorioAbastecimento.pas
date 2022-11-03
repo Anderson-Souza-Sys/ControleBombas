@@ -34,13 +34,6 @@ type
     RLLabel1: TRLLabel;
     rlblPeriodo: TRLLabel;
     rlblDataHora: TRLLabel;
-    RLBand2: TRLBand;
-    RLLabel2: TRLLabel;
-    RLLabel4: TRLLabel;
-    RLLabel5: TRLLabel;
-    RLLabel6: TRLLabel;
-    RLLabel7: TRLLabel;
-    RLLabel8: TRLLabel;
     RLBand4: TRLBand;
     RLDBResult1: TRLDBResult;
     RLLabel9: TRLLabel;
@@ -49,7 +42,6 @@ type
     RLDBResult2: TRLDBResult;
     RLDBResult4: TRLDBResult;
     RLDBResult5: TRLDBResult;
-    RLLabel12: TRLLabel;
     qryAbastecimentoVALOR_COBRADO_LITRO: TFloatField;
     RLGroupAgrupador: TRLGroup;
     RLBand3: TRLBand;
@@ -67,9 +59,20 @@ type
     RLLabel3: TRLLabel;
     rgAgrupar: TRadioGroup;
     qryAbastecimentoDATA: TDateField;
-    RLLabel10: TRLLabel;
     RLDBText10: TRLDBText;
     RLDB_Data: TRLDBText;
+    RLBand2: TRLBand;
+    RLLabel2: TRLLabel;
+    RLLabel4: TRLLabel;
+    RLLabel5: TRLLabel;
+    RLLabel6: TRLLabel;
+    RLLabel7: TRLLabel;
+    RLLabel8: TRLLabel;
+    RLLabel12: TRLLabel;
+    RLLabel10: TRLLabel;
+    Label1: TLabel;
+    cmbApelidoBomba: TComboBox;
+    rlblBomba: TRLLabel;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnGerarRelatorioClick(Sender: TObject);
@@ -88,6 +91,8 @@ type
       var PrintIt: Boolean);
     procedure RLDB_ApelidoBombaBeforePrint(Sender: TObject; var AText: string;
       var PrintIt: Boolean);
+    procedure rlblBombaBeforePrint(Sender: TObject; var AText: string;
+      var PrintIt: Boolean);
   private
     { Private declarations }
   public
@@ -97,7 +102,7 @@ type
 var
   frmRelatorioAbastecimento: TfrmRelatorioAbastecimento;
   dInicial, dFinal : TDateTime;
-  ultimaPagina : String;
+  ultimaPagina, listandoBomba : String;
   ordem : Integer;
 
 implementation
@@ -132,22 +137,28 @@ begin
 
     'where lancamento_abastecimento.data_hora >= :pData_Inicial and lancamento_abastecimento.data_hora < :pData_Final and '+
     'LANCAMENTO_ABASTECIMENTO.ID_BOMBA = Bombas.ID_Bomba and '+
-    'Bombas.id_Tanque = Tanques.id_tanque '+
-    'order by ';
+    'Bombas.id_Tanque = Tanques.id_tanque ';
 
+  If Trim(cmbApelidoBomba.Text) <> '<TODAS>' then
+  Begin
+    qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text + 'and Bombas.apelido_bomba = '+QuotedStr(Trim(cmbApelidoBomba.Text));
+    listandoBomba := Trim(cmbApelidoBomba.Text);
+  End Else
+    listandoBomba := '';{if}
 
   case rgAgrupar.ItemIndex of
     0 :
     Begin
       qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
-      'Bombas.apelido_bomba, lancamento_abastecimento.data_hora';
+      'order by Bombas.apelido_bomba, lancamento_abastecimento.data_hora';
 
       RLGroupAgrupador.DataFields := 'APELIDO_BOMBA';
+
     End;
     1 :
     Begin
       qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
-      'lancamento_abastecimento.data_hora, Bombas.apelido_bomba';
+      'order by lancamento_abastecimento.data_hora, Bombas.apelido_bomba';
 
       RLGroupAgrupador.DataFields := 'DATA';
     End;
@@ -185,13 +196,28 @@ begin
 end;{procedure}
 
 procedure TfrmRelatorioAbastecimento.FormShow(Sender: TObject);
+var
+  Bomba : TBombas;
 begin
   dtpInicial.DateTime := DataHora(True);
   dtpFinal.DateTime := DataHora;
 
   frmRelatorioAbastecimento.Width := btnFechar.Left + btnFechar.Width + 20;
   frmRelatorioAbastecimento.Height := btnFechar.Top + btnFechar.Height + 40;
+
+  Bomba := TBombas.Create;
+  Bomba.AlimentaListaCombo(cmbApelidoBomba, True);
+  Bomba.Destroy;
 end;{procedure}
+
+procedure TfrmRelatorioAbastecimento.rlblBombaBeforePrint(Sender: TObject;
+  var AText: string; var PrintIt: Boolean);
+begin
+  if listandoBomba = '' then
+    AText := 'Listando todas as Bombas'{}
+  Else
+    AText := 'Listando apenas a Bomba:  '+listandoBomba;
+end;
 
 procedure TfrmRelatorioAbastecimento.rlblDataHoraBeforePrint(Sender: TObject;
   var AText: string; var PrintIt: Boolean);
@@ -231,7 +257,9 @@ end;{procedure}
 procedure TfrmRelatorioAbastecimento.RLDB_ApelidoBombaBeforePrint(
   Sender: TObject; var AText: string; var PrintIt: Boolean);
 begin
-  if ordem <> 0 then
+  AText := 'BOMBA:  '+AText;
+
+  if (ordem <> 0) or (listandoBomba <> '') then
     PrintIt := False;{if}
 end;{procedure}
 
@@ -239,7 +267,7 @@ end;{procedure}
 procedure TfrmRelatorioAbastecimento.RLDB_DataBeforePrint(Sender: TObject;
   var AText: string; var PrintIt: Boolean);
 begin
-  AText := 'GRUPO:  '+AText;
+  AText := 'AGRUPADO PELA DATA:  '+AText;
 
   if ordem <> 1 then
     PrintIt := False;{if}

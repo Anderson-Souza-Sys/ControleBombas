@@ -12,7 +12,6 @@ object dmPrincipal: TdmPrincipal
         'Database=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas' +
         '\CONTROLEDB.FDB'
       'DriverID=IB')
-    Connected = True
     LoginPrompt = False
     Transaction = FDT
     UpdateTransaction = FDT

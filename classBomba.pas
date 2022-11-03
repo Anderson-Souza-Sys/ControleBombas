@@ -240,6 +240,7 @@ Begin
   End;{do}
 
   dmPrincipal.qryBomba.Close;
+  combo.ItemIndex := 0;
 End;{procedure}
 
 Function TBombas.Atualizar : Boolean;

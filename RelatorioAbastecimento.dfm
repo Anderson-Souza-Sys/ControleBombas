@@ -45,9 +45,22 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     Font.Style = [fsBold]
     ParentFont = False
   end
+  object Label1: TLabel
+    Left = 327
+    Top = 8
+    Width = 43
+    Height = 16
+    Caption = 'Bomba'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+  end
   object rlrAbastecimento: TRLReport
     Left = 8
-    Top = 124
+    Top = 126
     Width = 794
     Height = 1123
     Borders.Sides = sdCustom
@@ -67,7 +80,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Left = 38
       Top = 38
       Width = 718
-      Height = 45
+      Height = 65
       BandType = btHeader
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
@@ -153,136 +166,24 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Transparent = False
         BeforePrint = RLSystemInfo2BeforePrint
       end
-    end
-    object RLBand2: TRLBand
-      Left = 38
-      Top = 83
-      Width = 718
-      Height = 25
-      BandType = btColumnHeader
-      Borders.Sides = sdCustom
-      Borders.DrawLeft = False
-      Borders.DrawTop = False
-      Borders.DrawRight = False
-      Borders.DrawBottom = True
-      Transparent = False
-      object RLLabel2: TRLLabel
+      object rlblBomba: TRLLabel
         Left = 0
-        Top = 3
-        Width = 74
-        Height = 18
-        Caption = 'Data Hora'
+        Top = 43
+        Width = 83
+        Height = 19
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
-        Font.Height = -15
+        Font.Height = -16
         Font.Name = 'Arial'
         Font.Style = [fsBold]
         ParentFont = False
         Transparent = False
-      end
-      object RLLabel4: TRLLabel
-        Left = 287
-        Top = 4
-        Width = 45
-        Height = 18
-        Caption = 'Litros'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel5: TRLLabel
-        Left = 334
-        Top = 4
-        Width = 105
-        Height = 18
-        Caption = 'Valor Cobrado'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel6: TRLLabel
-        Left = 443
-        Top = 4
-        Width = 46
-        Height = 18
-        Caption = 'Imp %'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel7: TRLLabel
-        Left = 497
-        Top = 3
-        Width = 100
-        Height = 18
-        Caption = 'Valor Imposto'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel8: TRLLabel
-        Left = 613
-        Top = 3
-        Width = 104
-        Height = 18
-        Alignment = taRightJustify
-        Caption = 'Valor Sem Imp'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel12: TRLLabel
-        Left = 205
-        Top = 4
-        Width = 66
-        Height = 18
-        Caption = 'Val. Litro'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
-      end
-      object RLLabel10: TRLLabel
-        Left = 140
-        Top = 3
-        Width = 36
-        Height = 18
-        Caption = 'Tipo'
-        Font.Charset = DEFAULT_CHARSET
-        Font.Color = clBlack
-        Font.Height = -15
-        Font.Name = 'Arial'
-        Font.Style = [fsBold]
-        ParentFont = False
-        Transparent = False
+        BeforePrint = rlblBombaBeforePrint
       end
     end
     object RLBand4: TRLBand
       Left = 38
-      Top = 179
+      Top = 201
       Width = 718
       Height = 28
       BandType = btFooter
@@ -381,9 +282,9 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     end
     object RLGroupAgrupador: TRLGroup
       Left = 38
-      Top = 108
+      Top = 103
       Width = 718
-      Height = 71
+      Height = 98
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
       Borders.DrawTop = True
@@ -402,7 +303,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Transparent = False
       object RLBand3: TRLBand
         Left = 0
-        Top = 25
+        Top = 50
         Width = 718
         Height = 23
         Transparent = False
@@ -552,7 +453,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Top = 1
         Width = 718
         Height = 24
-        BandType = btColumnHeader
+        BandType = btHeader
         object RLDB_ApelidoBomba: TRLDBText
           Left = 0
           Top = 3
@@ -590,7 +491,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       end
       object RLBand6: TRLBand
         Left = 0
-        Top = 48
+        Top = 73
         Width = 718
         Height = 24
         BandType = btColumnFooter
@@ -618,6 +519,132 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           Width = 65
           Height = 16
           Caption = 'Sub Total'
+        end
+      end
+      object RLBand2: TRLBand
+        Left = 0
+        Top = 25
+        Width = 718
+        Height = 25
+        BandType = btColumnHeader
+        Borders.Sides = sdCustom
+        Borders.DrawLeft = False
+        Borders.DrawTop = False
+        Borders.DrawRight = False
+        Borders.DrawBottom = True
+        Transparent = False
+        object RLLabel2: TRLLabel
+          Left = 0
+          Top = 3
+          Width = 74
+          Height = 18
+          Caption = 'Data Hora'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel4: TRLLabel
+          Left = 287
+          Top = 4
+          Width = 45
+          Height = 18
+          Caption = 'Litros'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel5: TRLLabel
+          Left = 334
+          Top = 4
+          Width = 105
+          Height = 18
+          Caption = 'Valor Cobrado'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel6: TRLLabel
+          Left = 443
+          Top = 4
+          Width = 46
+          Height = 18
+          Caption = 'Imp %'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel7: TRLLabel
+          Left = 497
+          Top = 3
+          Width = 100
+          Height = 18
+          Caption = 'Valor Imposto'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel8: TRLLabel
+          Left = 613
+          Top = 3
+          Width = 104
+          Height = 18
+          Alignment = taRightJustify
+          Caption = 'Valor Sem Imp'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel12: TRLLabel
+          Left = 205
+          Top = 4
+          Width = 66
+          Height = 18
+          Caption = 'Val. Litro'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
+        end
+        object RLLabel10: TRLLabel
+          Left = 140
+          Top = 3
+          Width = 36
+          Height = 18
+          Caption = 'Tipo'
+          Font.Charset = DEFAULT_CHARSET
+          Font.Color = clBlack
+          Font.Height = -15
+          Font.Name = 'Arial'
+          Font.Style = [fsBold]
+          ParentFont = False
+          Transparent = False
         end
       end
     end
@@ -653,7 +680,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     TabOrder = 2
   end
   object btnGerarRelatorio: TBitBtn
-    Left = 522
+    Left = 530
     Top = 88
     Width = 85
     Height = 30
@@ -713,7 +740,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
   object rgAgrupar: TRadioGroup
     Left = 8
     Top = 63
-    Width = 500
+    Width = 510
     Height = 57
     Caption = '  Agrupar por  '
     Columns = 4
@@ -725,9 +752,23 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
     ItemIndex = 0
     Items.Strings = (
       'Nome Bomba'
-      'Por Dia')
+      'Por Data')
     ParentFont = False
     TabOrder = 5
+  end
+  object cmbApelidoBomba: TComboBox
+    Left = 327
+    Top = 30
+    Width = 381
+    Height = 24
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -13
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
+    TabOrder = 6
+    Text = 'cmbApelidoBomba'
   end
   object qryAbastecimento: TFDQuery
     Connection = dmPrincipal.FDC
@@ -760,7 +801,8 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         'where lancamento_abastecimento.data_hora >= :pData_Inicial and l' +
         'ancamento_abastecimento.data_hora < :pData_Final and'
       '  LANCAMENTO_ABASTECIMENTO.ID_BOMBA = Bombas.ID_Bomba and'
-      '  Bombas.id_Tanque = Tanques.id_tanque'
+      '  Bombas.id_Tanque = Tanques.id_tanque and '
+      '  Tanques.apelido_tanque like :pTanque'
       
         'order by Bombas.apelido_bomba, lancamento_abastecimento.data_hor' +
         'a')
@@ -776,6 +818,10 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       item
         Name = 'PDATA_FINAL'
         DataType = ftTimeStamp
+        ParamType = ptInput
+      end
+      item
+        Name = 'PTANQUE'
         ParamType = ptInput
       end>
     object qryAbastecimentoLITROS_ABASTECER: TFloatField
