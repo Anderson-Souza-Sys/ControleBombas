@@ -4,13 +4,13 @@ interface
 
 uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
-  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus;
+  Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.StdCtrls;
 
 Function Pergunta(Frase : String) : Boolean;
 procedure Erro(Frase : String);
 procedure Alerta(Frase : String);
 function DataHora(Atualiza : Boolean = False) : TDateTime;
-Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 15) : String;
+Function FormataValor(valor : String; decimais : byte = 2) : String;
 Procedure KeyValor(var Key : Char);
 Procedure KeyNumero(var Key : Char);
 Function TextoParaValor(valor : String) : Double;
@@ -18,7 +18,7 @@ Function Criptografa(texto : string; chave: string) : String;
 Function DesCriptografa(texto : string; chave : string) : String;
 Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
 Function SomaValores(valores : Array of String) : Double; overload;
-Function SomaValores(valores : Array of Double; decimais : byte; moeda : boolean = false) : String; overload;
+Function SomaValores(valores : Array of Double; decimais : byte = 2; moeda : boolean = false) : String; overload;
 Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
 Function MultiplicaDoisValoresStr(valores : Array of String) : Double; overload;
 
@@ -165,7 +165,7 @@ Begin
   result := total;
 End;{function}
 
-Function SomaValores(valores : Array of Double; decimais : byte; moeda : boolean = false) : string; overload;
+Function SomaValores(valores : Array of Double; decimais : byte = 2; moeda : boolean = false) : string; overload;
 var
   i : Integer;
   total : Double;
@@ -193,11 +193,11 @@ Begin
     Key := #0;{if}
 End;{procedure}
 
-Function FormataValor(valor : String; decimais : byte = 2; parteInteira : byte = 15) : String;
+Function FormataValor(valor : String; decimais : byte = 2) : String;
 Begin
   try
     valor := StringReplace(valor, '.', '', [rfReplaceAll, rfIgnoreCase]);
-    Result := FloatToStrF(StrToFloat(Trim(valor)), ffNumber, parteInteira, decimais);
+    Result := FloatToStrF(StrToFloat(Trim(valor)), ffNumber, 15, decimais);
   Except
     Erro('Valor incorreto!');
     Abort;
@@ -214,7 +214,6 @@ Begin
     Abort;
   end;{try}
 End;{function}
-
 
 Function Pergunta(Frase : String) : Boolean;
 var
@@ -244,7 +243,7 @@ End;{function}
 function DataHora(Atualiza : Boolean = False) : TDateTime;
 Begin
   Try
-    If (Atualiza) or (_hoje < 44857) then // 44857 = 23/10/2022
+    If (Atualiza) or (_hoje < 44871) then // 44871 = 06/11/2022
     Begin
       dmPrincipal.qryDataHora.Open;
       _hoje := dmPrincipal.qryDataHora.FieldByName('DataHora').AsDateTime;

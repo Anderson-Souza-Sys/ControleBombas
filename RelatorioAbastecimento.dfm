@@ -186,7 +186,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Top = 201
       Width = 718
       Height = 28
-      BandType = btFooter
+      BandType = btSummary
       Borders.Sides = sdCustom
       Borders.DrawLeft = False
       Borders.DrawTop = True
@@ -214,9 +214,9 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       object RLLabel9: TRLLabel
         Left = 0
         Top = 6
-        Width = 54
+        Width = 109
         Height = 18
-        Caption = 'TOTAL'
+        Caption = 'TOTAL GERAL'
         Font.Charset = DEFAULT_CHARSET
         Font.Color = clBlack
         Font.Height = -15

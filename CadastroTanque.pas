@@ -62,6 +62,9 @@ end;
 procedure TfrmCadastroTanque.btnGravarClick(Sender: TObject);
 begin
   inherited;
+  edtTipoCombustivelExit(Sender);
+  edtValorCombustivelExit(Sender);
+
   If not Pergunta('Deseja gravar este cadastro para o Tanque?') then
     Abort;{if}
 
@@ -121,7 +124,7 @@ begin
   inherited;
   if (edtTipoCombustivel.Text <> 'G') and (edtTipoCombustivel.Text <> 'D') then
   Begin
-    Erro('Só pemitido Tipo de Combustível "G" = Gasolina / "D" = Diesel');
+    Erro('Só pemitido tipo de combustível "G" = Gasolina / "D" = Diesel');
     Abort;
   End;{if}
 end;{procedure}

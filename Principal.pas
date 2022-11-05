@@ -7,13 +7,6 @@ uses
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, Vcl.ComCtrls, Vcl.Menus, Vcl.StdCtrls;
 
 type
-  TMainMenuHelper = class helper for TMainMenu
-  private
-  public
-    Procedure MudaSizeFont(tam : byte);
-  end;
-
-type
   TfrmPrincipal = class(TForm)
     stbPrincipal: TStatusBar;
     MainMenu1: TMainMenu;
@@ -147,7 +140,7 @@ begin
     dmPrincipal.FDC.Params.Append('DriverID=IB');
 
     dmPrincipal.FDC.Connected := True;
-    DataHora;
+    DataHora(True);
   Except on E: Exception do
     Begin
       Erro('Falha na conexão ao banco de dados.'+#13+E.Message);
@@ -203,13 +196,6 @@ begin
     Abort;
   End;{try}
   {$I+}
-end;{procedure}
-
-{ TMainMenuHelper }
-
-procedure TMainMenuHelper.MudaSizeFont(tam: byte);
-begin
-  Self.Tag := 1;
 end;{procedure}
 
 end.

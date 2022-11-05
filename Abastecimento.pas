@@ -78,7 +78,6 @@ begin
   lblValorCombustivel.Caption := FloatToStrF(Bomba.Atributos.Valor_Combustivel, ffNumber, 10, 2);
 end;{procedure}
 
-
 procedure TfrmAbastecimento.edtLitrosExit(Sender: TObject);
 var
   v1, v2 :  double;

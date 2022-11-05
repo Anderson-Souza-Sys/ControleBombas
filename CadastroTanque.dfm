@@ -71,6 +71,7 @@ inherited frmCadastroTanque: TfrmCadastroTanque
     Top = 122
     Width = 135
     Height = 24
+    Color = 16250871
     ReadOnly = True
     TabOrder = 4
     Text = 'edtLitros'
