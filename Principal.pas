@@ -21,6 +21,8 @@ type
     Relatrios1: TMenuItem;
     RelatriodeRecargas1: TMenuItem;
     RelatrioderAbastecimento1: TMenuItem;
+    Sair1: TMenuItem;
+    SairdoSistema1: TMenuItem;
     procedure CadastroTanque1Click(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure RecargaTanque1Click(Sender: TObject);
@@ -30,6 +32,8 @@ type
     procedure RelatriodeRecargas1Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
+    procedure FormCreate(Sender: TObject);
+    procedure SairdoSistema1Click(Sender: TObject);
   private
     { Private declarations }
   public
@@ -110,7 +114,12 @@ procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if not Pergunta('Deseja fechar o programa?') Then
     CanClose := False;{if}
-end;{procedure}
+end;procedure TfrmPrincipal.FormCreate(Sender: TObject);
+begin
+
+end;
+
+{procedure}
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 var
@@ -135,25 +144,36 @@ begin
       Application.CreateForm(TfrmConfiguraBanco, frmConfiguraBanco);
       frmConfiguraBanco.ShowModal;
 
-      sErro := '';
-
-      CFG.Caminho := CriptografaANSI(Trim(frmConfiguraBanco.edtCaminho.Text), CHAVE_CRIPTOGRAFIA, sErro);
-      frmPrincipal.TrataRetornoErro(sErro);
-
-      CFG.IP := CriptografaANSI(Trim(frmConfiguraBanco.edtIP.Text), CHAVE_CRIPTOGRAFIA, sErro);
-      frmPrincipal.TrataRetornoErro(sErro);
-
-      CFG.Usuario := CriptografaANSI(frmConfiguraBanco.edtUsuario.Text, CHAVE_CRIPTOGRAFIA, sErro);
-      frmPrincipal.TrataRetornoErro(sErro);
-
-      CFG.Senha := CriptografaANSI(frmConfiguraBanco.edtSenha.Text, CHAVE_CRIPTOGRAFIA, sErro);
-      frmPrincipal.TrataRetornoErro(sErro);
-
-      CFG.Porta := CriptografaANSI(Trim(frmConfiguraBanco.edtPorta.Text), CHAVE_CRIPTOGRAFIA, sErro);
-      frmPrincipal.TrataRetornoErro(sErro);
-
-      if frmConfiguraBanco.Tag = 1 then
+      If frmConfiguraBanco.Tag = 1 then
       Begin
+        sErro := '';
+
+        If (Trim(frmConfiguraBanco.edtCaminho.Text) = '') or (Trim(frmConfiguraBanco.edtUsuario.Text) = '') or(Trim(frmConfiguraBanco.edtSenha.Text) = '') or(Trim(frmConfiguraBanco.edtPorta.Text) = '') then
+        Begin
+          Erro('Dados incompletos! A configuração para acesso ao banco de dados não foi efetuada.');
+          Application.Terminate;
+          Abort;
+        End;{if}
+
+        CFG.Caminho := CriptografaANSI(Trim(frmConfiguraBanco.edtCaminho.Text), CHAVE_CRIPTOGRAFIA, sErro);
+        frmPrincipal.TrataRetornoErro(sErro);
+
+        if Trim(frmConfiguraBanco.edtIP.Text) <> '' then
+        Begin
+          CFG.IP := CriptografaANSI(Trim(frmConfiguraBanco.edtIP.Text), CHAVE_CRIPTOGRAFIA, sErro);
+          frmPrincipal.TrataRetornoErro(sErro);
+        End Else
+          CFG.IP := '';{if}
+
+        CFG.Usuario := CriptografaANSI(frmConfiguraBanco.edtUsuario.Text, CHAVE_CRIPTOGRAFIA, sErro);
+        frmPrincipal.TrataRetornoErro(sErro);
+
+        CFG.Senha := CriptografaANSI(frmConfiguraBanco.edtSenha.Text, CHAVE_CRIPTOGRAFIA, sErro);
+        frmPrincipal.TrataRetornoErro(sErro);
+
+        CFG.Porta := CriptografaANSI(Trim(frmConfiguraBanco.edtPorta.Text), CHAVE_CRIPTOGRAFIA, sErro);
+        frmPrincipal.TrataRetornoErro(sErro);
+
         {$I-}
         AssignFile(F, _caminhoCfgDB);
         Rewrite(F);
@@ -162,11 +182,9 @@ begin
         {$I+}
       End;{if}
 
-      frmConfiguraBanco.Free;
-      frmConfiguraBanco := nil;
+      FreeAndNil(frmConfiguraBanco);
     End;{if}
 
-    {$I-}
     If not FileExists(_caminhoCfgDB) Then
     Begin
       Erro('Configuração para acesso ao banco de dados não foi efetuada.');
@@ -174,6 +192,7 @@ begin
       Abort;
     End;{if}
 
+    {$I-}
     AssignFile(f, _caminhoCfgDB);
     Reset(f);
     Read(f, CFG);
@@ -182,8 +201,14 @@ begin
 
     banco := DesCriptografaANSI(CFG.Caminho, CHAVE_CRIPTOGRAFIA, sErro);
     TrataRetornoErro(sErro);
-    ip := DesCriptografaANSI(CFG.IP, CHAVE_CRIPTOGRAFIA, sErro);
-    TrataRetornoErro(sErro);
+
+    if Trim(CFG.IP) <> '' then
+    Begin
+      ip := DesCriptografaANSI(CFG.IP, CHAVE_CRIPTOGRAFIA, sErro);
+      TrataRetornoErro(sErro);
+    End Else
+      ip := '';{if}
+
     login := DesCriptografaANSI(CFG.Usuario, CHAVE_CRIPTOGRAFIA, sErro);
     TrataRetornoErro(sErro);
     senha := DesCriptografaANSI(CFG.Senha, CHAVE_CRIPTOGRAFIA, sErro);
@@ -214,7 +239,7 @@ begin
 
   Except on E: Exception do
     Begin
-      Erro('Falha na conexão ao banco de dados.'+#13+E.Message);
+      Erro('Falha na conexão com o banco de dados.'+sLineBreak+E.Message);
       Application.Terminate;
       Abort;
     End;
@@ -242,13 +267,19 @@ begin
   frmRelatorioRecarga.Show;
 end;{procedure}
 
+procedure TfrmPrincipal.SairdoSistema1Click(Sender: TObject);
+begin
+  Close;
+end;{procedure}
+
 procedure TfrmPrincipal.EventoErro(Sender: TObject; E: Exception);
 var
- f : TextFile;
+  f : TextFile;
 begin
   {$I-}
   Try
     AssignFile(f, _path+'errolog.txt');
+
     If FileExists(_path+'errolog.txt') Then
       Append(f){}
     Else
@@ -257,7 +288,7 @@ begin
     Writeln(f, DateTimeToStr(DataHora(True))+' | '+ E.Message);
     CloseFile(f);
 
-    Erro('Falha no sistema! '+Chr(13)+Copy(E.Message, 1, 150)+#13+#13+
+    Erro('Falha no sistema! '+sLineBreak+Copy(E.Message, 1, 150)+sLineBreak+sLineBreak+
          'Se o erro persistir contate o suporte.');
   Except
     Application.Terminate;

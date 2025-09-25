@@ -119,7 +119,7 @@ begin
   inherited;
   if not novo then
   Begin
-    if not Bomba.Localizar(cmbApelidoBomba.Text) Then
+    if (Trim(cmbApelidoBomba.Text) <> '') and (not Bomba.Localizar(cmbApelidoBomba.Text)) Then
       Erro(Bomba.Mensagem);{if}
 
     cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;
@@ -132,7 +132,7 @@ end;{procedure}
 procedure TfrmCadastroBomba.cmbApelidoTanqueSelect(Sender: TObject);
 begin
   inherited;
-  if not Tanque.Localizar(cmbApelidoTanque.Text) Then
+  if (Trim(cmbApelidoTanque.Text) <> '') and (not Tanque.Localizar(cmbApelidoTanque.Text)) Then
     Erro(Tanque.Mensagem);{if}
 
   Bomba.Campos.ID_Tanque := Tanque.Campos.ID_Tanque;

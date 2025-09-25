@@ -1,7 +1,7 @@
 object frmPrincipal: TfrmPrincipal
   Left = 0
   Top = 0
-  Caption = 'Posto Bombas'
+  Caption = 'Controle de Bombas'
   ClientHeight = 372
   ClientWidth = 691
   Color = clBtnShadow
@@ -15,6 +15,7 @@ object frmPrincipal: TfrmPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
+  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13
@@ -35,17 +36,17 @@ object frmPrincipal: TfrmPrincipal
     Left = 24
     Top = 16
     object Abastecimento1: TMenuItem
-      Caption = 'Abastecimento'
+      Caption = '&Abastecimento'
       object Abastecer1: TMenuItem
-        Caption = 'Abastecer'
+        Caption = '&Abastecer'
         Hint = ' Abaste'#231'a com gasolina ou diesel '
         OnClick = Abastecer1Click
       end
     end
     object Bombas1: TMenuItem
-      Caption = 'Bombas'
+      Caption = '&Bombas'
       object CadastrodeBombas1: TMenuItem
-        Caption = 'Cadastro de Bombas'
+        Caption = '&Cadastro de Bombas'
         Hint = ' Cadastro, busca e exclus'#227'o de Bombas de combust'#237'vel '
         OnClick = CadastrodeBombas1Click
       end
@@ -66,16 +67,23 @@ object frmPrincipal: TfrmPrincipal
       end
     end
     object Relatrios1: TMenuItem
-      Caption = 'Relat'#243'rios'
+      Caption = '&Relat'#243'rios'
       object RelatrioderAbastecimento1: TMenuItem
-        Caption = 'Relat'#243'rio der Abastecimento'
+        Caption = 'Relat'#243'rio der &Abastecimento'
         Hint = ' Relat'#243'rio dos abastecimentos feito pelas bombas'
         OnClick = RelatrioderAbastecimento1Click
       end
       object RelatriodeRecargas1: TMenuItem
-        Caption = 'Relat'#243'rio de Recargas'
+        Caption = 'Relat'#243'rio de &Recargas'
         Hint = ' Relat'#243'rio de recargas nos tanques de combust'#237'veis'
         OnClick = RelatriodeRecargas1Click
+      end
+    end
+    object Sair1: TMenuItem
+      Caption = '&Sair'
+      object SairdoSistema1: TMenuItem
+        Caption = '&Sair do Sistema'
+        OnClick = SairdoSistema1Click
       end
     end
   end

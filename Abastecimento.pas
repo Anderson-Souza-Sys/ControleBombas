@@ -76,7 +76,7 @@ end;{procedure}
 
 procedure TfrmAbastecimento.cmbApelidoBombaSelect(Sender: TObject);
 begin
-  if not Bomba.Localizar(cmbApelidoBomba.Text) Then
+  if (Trim(cmbApelidoBomba.Text) <> '') and (not Bomba.Localizar(cmbApelidoBomba.Text)) Then
     Erro(Bomba.Mensagem);{if}
 
   cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;

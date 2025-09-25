@@ -73,7 +73,7 @@ begin
   inherited;
   if not novo then
   Begin
-    if not Tanque.Localizar(cmbApelidoTanque.Text) Then
+    if (Trim(cmbApelidoTanque.Text) <> '') and (not Tanque.Localizar(cmbApelidoTanque.Text)) Then
       Erro(Tanque.Mensagem);{if}
 
     cmbApelidoTanque.Text := Tanque.Campos.Apelido_Tanque;
