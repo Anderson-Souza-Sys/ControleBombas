@@ -1,8 +1,14 @@
-# 🔧 Projeto Demonstrativo: Controle de Bombas de Combustível (Delphi + Firebird)
+# # 🔧 Projeto Demonstrativo: Controle de Bombas de Combustível (Delphi + Firebird) com 🔐 Criptografia
 
 ## 💡 Sobre o Projeto
 
-Este é um sistema demonstrativo de cadastro e controle de bombas de combustível, criado com foco em **boas práticas de programação em Delphi**, utilizando banco de dados Firebird e relatórios com Fortes Report. O objetivo é servir como um projeto de **portfólio técnico**, demonstrando domínio em:
+💡 Projeto Demonstrativo: Sistema de Controle de Bombas de Combustível desenvolvido em Delphi, com banco de dados Firebird e geração de relatórios via Fortes Report.
+
+🔐 Destaque: Este projeto utiliza um algoritmo de criptografia próprio, desenvolvido por mim com fins de estudo e aplicação prática no contexto do sistema. A abordagem foi elogiada por outros desenvolvedores pela iniciativa e atenção à segurança da informação.
+
+🧪 Projeto com foco demonstrativo, voltado ao aprendizado e à apresentação de técnicas em desenvolvimento desktop, integração com banco de dados e controle de acesso seguro.
+
+Este é um sistema de cadastro e controle de bombas de combustível, criado com foco em **boas práticas de programação em Delphi**, utilizando banco de dados Firebird e relatórios com Fortes Report. O objetivo é servir como um projeto de **portfólio técnico**, demonstrando domínio em:
 
 - Orientação a Objetos
 - Acesso a banco de dados
@@ -10,7 +16,7 @@ Este é um sistema demonstrativo de cadastro e controle de bombas de combustíve
 - Tratamento de erros global
 - Boas práticas de UX voltadas à VCL Delphi
 - Padrão de desenvolvimento com formulários herdados (inherited)
-
+- Criptografia Própria
 
 ---
 
