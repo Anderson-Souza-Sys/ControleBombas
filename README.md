@@ -44,7 +44,7 @@ Este é um sistema de cadastro e controle de bombas de combustível, criado com 
 
 ### 🧩 Middleware em Delphi: Tratamento Global de Erros e Ajuda Contextual
 
-Apesar do Delphi utilizar uma terminologia clássica, conceitos modernos como *middleware* foram aplicados:
+Embora o Delphi siga uma terminologia mais tradicional, conceitos modernos como middleware foram aplicados de forma prática:
 
 - **Middleware de erros**: Toda exceção não tratada diretamente na aplicação é interceptada por um **handler global**, exibindo mensagens amigáveis ao usuário e registrando detalhes técnicos em `errolog.txt`.
 - **Middleware visual de dicas (hints)**: Os hints dos itens do menu principal são capturados e exibidos automaticamente na barra de status, oferecendo ajuda contextual em tempo real.
@@ -80,9 +80,10 @@ Apesar do Delphi utilizar uma terminologia clássica, conceitos modernos como *m
 ## 📂 Organização de Código
 
 - Separação por camadas: dados, regras de negócio e interface.
-- Técnicas "Fail Fast", Separação de responsábilidades, Clean Code.
+- Técnicas "Fail Fast", Separação de responsabilidades, Clean Code.
 - Uso de consultas dinâmicas e queries fixas para operações diretas.
-- Implementação de **camada de validação** (ex: verificação de apelidos duplicados, integridade referencial antes de exclusão, limite de bombas por tanque).
+- Implementação de **camada de validação** (ex: verificação de nomes duplicados, integridade referencial antes de exclusão, limite de bombas por tanque).
+- A rotina de criptografia foi implementada em uma **DLL externa** por motivos de segurança e organização da arquitetura. **Encapsular a lógica de criptografia**, mantem o código sensível isolado da aplicação principal.
 
 ---
 
