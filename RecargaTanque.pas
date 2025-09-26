@@ -50,6 +50,12 @@ begin
   inherited;
   edtLitrosIncluirExit(Sender);
 
+  if Trim(cmbApelidoTanque.Text) = '' Then
+  Begin
+    Erro('Informe um Tanque de combustível.');
+    Exit;
+  End;{if}
+
   If not Pergunta('Deseja incluir esta recarga a bomba?') then
     Exit;{if}
 
@@ -92,7 +98,7 @@ procedure TfrmRecargaTanque.edtLitrosIncluirKeyPress(Sender: TObject;
   var Key: Char);
 begin
   inherited;
-  KeyValor(Key);
+  KeyValor(Key, edtLitrosIncluir);
 end;{procedure}
 
 procedure TfrmRecargaTanque.FormClose(Sender: TObject;

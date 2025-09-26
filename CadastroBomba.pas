@@ -74,6 +74,18 @@ begin
   inherited;
   Ok := False;
 
+  if Trim(cmbApelidoBomba.Text) = '' Then
+  Begin
+    Erro('Informe uma bomba de combustível.');
+    Exit;
+  End;{if}
+
+  if Trim(cmbApelidoTanque.Text) = '' Then
+  Begin
+    Erro('Informe um tanque de combustível.');
+    Exit;
+  End;{if}
+
   If Bomba.Campos.ID_Tanque < 1 Then
   Begin
     Alerta('A Bomba deve estar vinculada a um Tanque');

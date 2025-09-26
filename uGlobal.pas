@@ -14,15 +14,15 @@ Function Pergunta(Frase : String) : Boolean;
 procedure Erro(Frase : String);
 procedure Alerta(Frase : String);
 function DataHora(Atualiza : Boolean = False) : TDateTime;
-Function FormataValor(valor : String; decimais : byte = 2) : String;
-Procedure KeyValor(var Key : Char);
+Function FormataValor(valor : String; decimais : byte = 2; charDecimal : char = #44) : String;
+Procedure KeyValor(var Key : Char; var edit : TEdit);
 Procedure KeyNumero(var Key : Char);
 Function TextoParaValor(valor : String) : Double;
-Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
-Function SomaValores(valores : Array of String) : Double; overload;
+Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false; charMilhar : char = #46) : String; overload;
+Function SomaValores(valores : Array of String; charMilhar : char = #46) : Double; overload;
 Function SomaValores(valores : Array of Double; decimais : byte = 2; moeda : boolean = false) : String; overload;
-Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
-Function MultiplicaDoisValoresStr(valores : Array of String) : Double; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false; charMilhar : char = #46) : String; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String; charMilhar : char = #46) : Double; overload;
 
 
 type
@@ -77,7 +77,7 @@ begin
   end;
 end;{function}
 
-Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String; decimais : byte; moeda : boolean = false; charMilhar : char = #46) : String; overload;
 var
   s : string;
   v1, v2,
@@ -86,11 +86,11 @@ Begin
   result := '';
 
   try
-    s := StringReplace(valores[0], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(valores[0], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
     s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
     v1 := StrToFloat(Trim(s));
 
-    s := StringReplace(valores[1], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(valores[1], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
     s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
     v2 := StrToFloat(Trim(s));
 
@@ -102,12 +102,12 @@ Begin
   end;
 
   if moeda then
-    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+    result := FloatToStrF(total, ffCurrency, 14+decimais, decimais){}
   Else
-    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+    result := FloatToStrF(total, ffNumber, 14+decimais, decimais);{if}
 End;{function}
 
-Function MultiplicaDoisValoresStr(valores : Array of String) : Double; overload;
+Function MultiplicaDoisValoresStr(valores : Array of String; charMilhar : char = #46) : Double; overload;
 var
   s : string;
   v1, v2,
@@ -116,11 +116,11 @@ Begin
   Result := 0.0;
 
   try
-    s := StringReplace(valores[0], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(valores[0], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
     s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
     v1 := StrToFloat(Trim(s));
 
-    s := StringReplace(valores[1], '.', '', [rfReplaceAll, rfIgnoreCase]);
+    s := StringReplace(valores[1], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
     s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
     v2 := StrToFloat(Trim(s));
 
@@ -134,7 +134,7 @@ Begin
   result := total;
 End;{function}
 
-Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false) : String; overload;
+Function SomaValores(valores : Array of String; decimais : byte; moeda : boolean = false; charMilhar : char = #46) : String; overload;
 var
   i : Integer;
   s : string;
@@ -146,7 +146,7 @@ Begin
   try
     For i := 0 to Length(valores)-1 do
     Begin
-       s := StringReplace(valores[i], '.', '', [rfReplaceAll, rfIgnoreCase]);
+       s := StringReplace(valores[i], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
        s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
        total := total + StrToFloat(Trim(s));
     End;{for}
@@ -157,12 +157,12 @@ Begin
   end;
 
   if moeda then
-    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+    result := FloatToStrF(total, ffCurrency, 14+decimais, decimais){}
   Else
-    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+    result := FloatToStrF(total, ffNumber, 14+decimais, decimais);{if}
 End;{function}
 
-Function SomaValores(valores : Array of String) : double; overload;
+Function SomaValores(valores : Array of String; charMilhar : char = #46) : double; overload;
 var
   i : Integer;
   s : string;
@@ -174,7 +174,7 @@ Begin
   try
     For i := 0 to Length(valores)-1 do
     Begin
-       s := StringReplace(valores[i], '.', '', [rfReplaceAll, rfIgnoreCase]);
+       s := StringReplace(valores[i], charMilhar, '', [rfReplaceAll, rfIgnoreCase]);
        s := StringReplace(s, FormatSettings.CurrencyString, '', [rfReplaceAll, rfIgnoreCase]);
        total := total + StrToFloat(Trim(s));
     End;{for}
@@ -198,14 +198,19 @@ Begin
     total := total + valores[i];{for}
 
   if moeda then
-    result := FloatToStrF(total, ffCurrency, 15, decimais){}
+    result := FloatToStrF(total, ffCurrency, 14+decimais, decimais){}
   Else
-    result := FloatToStrF(total, ffNumber, 15, decimais);{if}
+    result := FloatToStrF(total, ffNumber, 14+decimais, decimais);{if}
 End;{function}
 
-Procedure KeyValor(var Key : Char);
+Procedure KeyValor(var Key : Char; var edit : TEdit);
 Begin
-  if not (((Ord(Key) >= 48) and (Ord(Key) <= 57)) or (Key = #44) or (Key = #46) or (Key = #8) or (Key = #26) or (Key = #26))  Then
+  if (Key = #44) or (Key = #46) then
+  Begin
+    if (Pos(#44, edit.Text) > 0) or (Pos(#46, edit.Text) > 0) then
+      Key := #0;{if}
+  End Else
+  if not (((Ord(Key) >= 48) and (Ord(Key) <= 57)) or (Key = #8) or (Key = #26) or (Key = #26))  Then
     Key := #0;{if}
 End;{procedure}
 
@@ -215,11 +220,13 @@ Begin
     Key := #0;{if}
 End;{procedure}
 
-Function FormataValor(valor : String; decimais : byte = 2) : String;
+Function FormataValor(valor : String; decimais : byte = 2; charDecimal : char = #44) : String;
 Begin
   result := '';
   try
-    valor := StringReplace(valor, '.', '', [rfReplaceAll, rfIgnoreCase]);
+    valor := StringReplace(valor, ',', charDecimal, [rfReplaceAll, rfIgnoreCase]);
+    valor := StringReplace(valor, '.', charDecimal, [rfReplaceAll, rfIgnoreCase]);
+
     Result := FloatToStrF(StrToFloat(Trim(valor)), ffNumber, 15, decimais);
   Except
     Erro('Valor incorreto!');

@@ -48,6 +48,13 @@ var
   Abastecimento : TAbastecimentos;
 begin
   edtLitrosExit(Sender);
+
+  if Trim(cmbApelidoBomba.Text) = '' Then
+  Begin
+    Erro('Informe uma bomba de combustível.');
+    Exit;
+  End;{if}
+
   Abastecimento := TAbastecimentos.Create;
 
   Try
@@ -97,7 +104,7 @@ end;{procedure}
 
 procedure TfrmAbastecimento.edtLitrosKeyPress(Sender: TObject; var Key: Char);
 begin
-  KeyValor(Key);
+  KeyValor(Key, edtLitros);
 end;{procedure}
 
 procedure TfrmAbastecimento.FormClose(Sender: TObject; var Action: TCloseAction);

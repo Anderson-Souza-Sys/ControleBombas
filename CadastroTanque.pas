@@ -68,8 +68,14 @@ var
 begin
   inherited;
   Ok := False;
-  edtTipoCombustivelExit(Sender);
   edtValorCombustivelExit(Sender);
+  edtTipoCombustivelExit(Sender);
+
+  if Trim(cmbApelidoTanque.Text) = '' Then
+  Begin
+    Erro('Informe um Tanque de combustível.');
+    Exit;
+  End;{if}
 
   if novo then
   Begin
@@ -133,7 +139,7 @@ end;{procedure}
 procedure TfrmCadastroTanque.edtValorCombustivelKeyPress(Sender: TObject; var Key: Char);
 begin
   inherited;
-  KeyValor(Key);
+  KeyValor(Key, edtValorCombustivel);
 end;{procedure}
 
 procedure TfrmCadastroTanque.edtTipoCombustivelExit(Sender: TObject);
