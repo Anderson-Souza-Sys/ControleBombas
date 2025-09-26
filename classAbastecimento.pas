@@ -150,13 +150,6 @@ Begin
 
     dmPrincipal.FDT.StartTransaction;
 
-    with dmPrincipal.updLitros do
-    Begin
-      ParamByName('pID_Tanque').AsInteger := Atributos.ID_Tanque;
-      ParamByName('pLitros').AsFloat :=  calculoLitros;
-      ExecSQL;
-    End;{with}
-
     with dmPrincipal.qryGenerica do
     Begin
       SQL.Text := 'INSERT INTO LANCAMENTO_ABASTECIMENTO '+

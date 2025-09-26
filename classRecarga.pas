@@ -125,11 +125,6 @@ Begin
       ParamByName('pLitros').AsFloat := Campos.Litros_Recarga;
       ParamByName('pID').AsInteger := Campos.ID_Tanque;
       ExecSQL;
-
-      SQL.Text := 'UPDATE TANQUES SET LITROS = LITROS + :pLitros WHERE ID_TANQUE = :pID';
-      ParamByName('pLitros').AsFloat := Campos.Litros_Recarga;
-      ParamByName('pID').AsInteger := Campos.ID_Tanque;
-      ExecSQL;
     End;{with}
 
     Try

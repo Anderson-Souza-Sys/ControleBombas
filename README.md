@@ -49,6 +49,28 @@ Embora o Delphi siga uma terminologia mais tradicional, conceitos modernos como 
 - **Middleware de erros**: Toda exceção não tratada diretamente na aplicação é interceptada por um **handler global**, exibindo mensagens amigáveis ao usuário e registrando detalhes técnicos em `errolog.txt`.
 - **Middleware visual de dicas (hints)**: Os hints dos itens do menu principal são capturados e exibidos automaticamente na barra de status, oferecendo ajuda contextual em tempo real.
 
+## ⚙️ Regras de Negócio no Banco de Dados (Triggers)
+
+Para garantir a integridade dos dados e minimizar a lógica repetida na aplicação, o sistema utiliza **triggers no Firebird** que automatizam ações diretamente no banco.
+
+### 🔄 Abastecimento
+- Ao inserir um novo lançamento de abastecimento (`LANCAMENTO_ABASTECIMENTO`):
+  - O campo `DATA_HORA` é preenchido automaticamente com a data/hora atual.
+  - A quantidade de litros abastecida é subtraída automaticamente do tanque correspondente.
+
+### 💧 Recarga
+- Ao registrar uma recarga de combustível (`LANCAMENTO_RECARGA`):
+  - O campo `DATA_HORA` também é preenchido automaticamente.
+  - A quantidade recarregada é somada ao total do tanque.
+
+Essas triggers garantem:
+- **Consistência automática dos dados**
+- **Código Delphi mais limpo e leve**
+- **Regras de negócio centralizadas no banco, evitando falhas humanas**
+
+> 💡 Isso permite que mesmo scripts externos ou integrações futuras mantenham a integridade das regras sem depender da aplicação Delphi.
+
+
 ### 🖼️ Usabilidade e Detalhes Visuais
 
 - Uso de **Formulários herdados (Inheritable Forms)** para padronizar telas.
