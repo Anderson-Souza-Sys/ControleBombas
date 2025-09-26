@@ -121,9 +121,8 @@ Begin
 
     with dmPrincipal.QryGenerica do
     Begin
-      SQL.Text := 'UPDATE LANCAMENTO_RECARGA SET LITROS_RECARGA = :pLitros, DATA_HORA = :pDataHora WHERE ID_TANQUE = :pID';
+      SQL.Text := 'INSERT LANCAMENTO_RECARGA (LITROS_RECARGA, ID_TANQUE) values (:pLitros, :pID)';
       ParamByName('pLitros').AsFloat := Campos.Litros_Recarga;
-      ParamByName('pDataHora').AsDateTime := DataHora(True);
       ParamByName('pID').AsInteger := Campos.ID_Tanque;
       ExecSQL;
 

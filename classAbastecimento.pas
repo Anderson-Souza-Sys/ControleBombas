@@ -148,7 +148,6 @@ Begin
 
     FreeAndNil(Tanque);
 
-    DataHora(True);
     dmPrincipal.FDT.StartTransaction;
 
     with dmPrincipal.updLitros do
@@ -161,15 +160,14 @@ Begin
     with dmPrincipal.qryGenerica do
     Begin
       SQL.Text := 'INSERT INTO LANCAMENTO_ABASTECIMENTO '+
-                  '(ID_Bomba, LITROS_ABASTECER, Valor_Cobrado, Imposto_Perc, Data_Hora) '+
+                  '(ID_Bomba, LITROS_ABASTECER, Valor_Cobrado, Imposto_Perc) '+
                   'VALUES '+
-                  '(:pID_Bomba, :pLITROS_ABASTECER, :pValor_Cobrado, :pImposto_Perc, :pData_Hora)';
+                  '(:pID_Bomba, :pLITROS_ABASTECER, :pValor_Cobrado, :pImposto_Perc)';
 
       ParamByName('pID_Bomba').AsInteger := Campos.ID_Bomba;
       ParamByName('pLITROS_ABASTECER').AsFloat := Campos.Litros_Abastecer;
       ParamByName('pValor_Cobrado').AsFloat := Campos.Valor_Cobrado;
       ParamByName('pImposto_Perc').AsFloat := IMPOSTO_COMBUSTIVEL;
-      ParamByName('pData_Hora').AsDateTime := DataHora(False);
       ExecSQL;
     End;{with}
 
