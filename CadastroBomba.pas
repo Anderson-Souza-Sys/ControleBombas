@@ -68,7 +68,7 @@ begin
   End;{if}
 
   cmbApelidoTanque.ItemIndex := 0;
-  Tanque.AlimentaListaCombo(cmbApelidoBomba);
+  Bomba.AlimentaListaCombo(cmbApelidoBomba);
   cmbApelidoBomba.ItemIndex := 0;
   cmbApelidoBombaSelect(Sender);
 end;{procedure}

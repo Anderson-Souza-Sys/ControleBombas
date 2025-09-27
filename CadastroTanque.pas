@@ -124,6 +124,7 @@ procedure TfrmCadastroTanque.btnNovoClick(Sender: TObject);
 begin
   inherited;
   novo := True;
+  edtValorCombustivel.Text := '0,00';
   cmbApelidoTanque.SetFocus;
 end;{procedure}
 
