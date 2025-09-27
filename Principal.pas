@@ -114,12 +114,7 @@ procedure TfrmPrincipal.FormCloseQuery(Sender: TObject; var CanClose: Boolean);
 begin
   if not Pergunta('Deseja fechar o programa?') Then
     CanClose := False;{if}
-end;procedure TfrmPrincipal.FormCreate(Sender: TObject);
-begin
-
-end;
-
-{procedure}
+end;{procedure}
 
 procedure TfrmPrincipal.FormShow(Sender: TObject);
 var
@@ -150,7 +145,7 @@ begin
 
         If (Trim(frmConfiguraBanco.edtCaminho.Text) = '') or (Trim(frmConfiguraBanco.edtUsuario.Text) = '') or(Trim(frmConfiguraBanco.edtSenha.Text) = '') or(Trim(frmConfiguraBanco.edtPorta.Text) = '') then
         Begin
-          Erro('Dados incompletos! A configuração para acesso ao banco de dados não foi efetuada.');
+          Erro('Dados incompletos! A configuração para acesso ao banco de dados não pode ser efetuada.');
           Application.Terminate;
           Abort;
         End;{if}

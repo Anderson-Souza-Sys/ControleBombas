@@ -34,42 +34,31 @@ Este é um sistema de cadastro e controle de bombas de combustível, criado com 
 - **Middleware**
 - **Usabilidade**
 
-### 🔐 Criptografia de Dados de Conexão
+## 🔐 Criptografia de Dados de Conexão
 
+- Algoritmo de Criptografia Próprio (Desenvolvido do Zero)
 - Ao iniciar, caso o arquivo `database.dat` não exista no diretório do executável, o sistema exibe uma **tela de configuração da conexão com o banco**.
 - Esses dados são **salvos em arquivo binário criptografado** com rotina própria de criptografia **desenvolvida integralmente por mim**.
-- Acompanha um **aplicativo auxiliar** para testar e validar essa rotina.
+- Ferramenta de Teste Inclusa. Um **aplicativo auxiliar** para quem quiser testar, validar ou auditar a rotina.
 
 <img src="configurabanco.png" alt="Tela de configuração do banco"/>
 
-### 🧩 Middleware em Delphi: Tratamento Global de Erros e Ajuda Contextual
+  ### 🧪 Aplicativo Auxiliar
+
+  Além do sistema principal, o repositório inclui um **utilitário de criptografia** para testar a eficiência da rotina usada no armazenamento dos dados de conexão.
+
+  <img src="criptoTool.png" alt="Explicações de uso ferramenta de criptografia."/>
+
+## 🧩 Middleware em Delphi: Tratamento Global de Erros e Ajuda Contextual
 
 Embora o Delphi siga uma terminologia mais tradicional, conceitos modernos como middleware foram aplicados de forma prática:
 
 - **Middleware de erros**: Toda exceção não tratada diretamente na aplicação é interceptada por um **handler global**, exibindo mensagens amigáveis ao usuário e registrando detalhes técnicos em `errolog.txt`.
 - **Middleware visual de dicas (hints)**: Os hints dos itens do menu principal são capturados e exibidos automaticamente na barra de status, oferecendo ajuda contextual em tempo real.
 
-## ⚙️ Regras de Negócio no Banco de Dados (Triggers)
+### ⚙️ Regras de Negócio no Banco de Dados (Triggers)
 
 Para garantir a integridade dos dados e minimizar a lógica repetida na aplicação, o sistema utiliza **triggers no Firebird** que automatizam ações diretamente no banco.
-
-### 🔄 Abastecimento
-- Ao inserir um novo lançamento de abastecimento (`LANCAMENTO_ABASTECIMENTO`):
-  - O campo `DATA_HORA` é preenchido automaticamente com a data/hora atual.
-  - A quantidade de litros abastecida é subtraída automaticamente do tanque correspondente.
-
-### 💧 Recarga
-- Ao registrar uma recarga de combustível (`LANCAMENTO_RECARGA`):
-  - O campo `DATA_HORA` também é preenchido automaticamente.
-  - A quantidade recarregada é somada ao total do tanque.
-
-Essas triggers garantem:
-- **Consistência automática dos dados**
-- **Código Delphi mais limpo e leve**
-- **Regras de negócio centralizadas no banco, evitando falhas humanas**
-
-> 💡 Isso permite que mesmo scripts externos ou integrações futuras mantenham a integridade das regras sem depender da aplicação Delphi.
-
 
 ### 🖼️ Usabilidade e Detalhes Visuais
 
@@ -106,14 +95,6 @@ Essas triggers garantem:
 - Uso de consultas dinâmicas e queries fixas para operações diretas.
 - Implementação de **camada de validação** (ex: verificação de nomes duplicados, integridade referencial antes de exclusão, limite de bombas por tanque).
 - A rotina de criptografia foi implementada em uma **DLL externa** por motivos de segurança e organização da arquitetura. **Encapsular a lógica de criptografia**, mantem o código sensível isolado da aplicação principal.
-
----
-
-## 🧪 Aplicativo Auxiliar
-
-Além do sistema principal, o repositório inclui um **utilitário de criptografia** para testar a eficiência da rotina usada no armazenamento dos dados de conexão.
-
-<img src="criptoTool.png" alt="Explicações de uso ferramenta de criptografia."/>
 
 ---
 

@@ -33,8 +33,8 @@ object frmPrincipal: TfrmPrincipal
       end>
   end
   object MainMenu1: TMainMenu
-    Left = 24
-    Top = 16
+    Left = 32
+    Top = 24
     object Abastecimento1: TMenuItem
       Caption = '&Abastecimento'
       object Abastecer1: TMenuItem
