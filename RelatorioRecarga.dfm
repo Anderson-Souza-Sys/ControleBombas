@@ -457,17 +457,19 @@ object frmRelatorioRecarga: TfrmRelatorioRecarga
   object qryRecarga: TFDQuery
     Connection = dmPrincipal.FDC
     SQL.Strings = (
-      'select LANCAMENTO_Recarga.*,'
-      ''
-      
-        '  Tanques.apelido_tanque, Tanques.Tipo_combustivel, Tanques.Valo' +
-        'r_Combustivel'
-      'from LANCAMENTO_Recarga, Tanques'
-      
-        'where lancamento_Recarga.data_hora >= :pData_Inicial and lancame' +
-        'nto_Recarga.data_hora < :pData_Final and'
-      '  LANCAMENTO_Recarga.id_tanque = Tanques.id_tanque'
-      'order by Tanques.apelido_tanque, lancamento_Recarga.data_hora')
+      'SELECT '
+      '  LANCAMENTO_Recarga.*,'
+      '  Tanques.apelido_tanque, '
+      '  Tanques.Tipo_combustivel, '
+      '  Tanques.Valor_Combustivel'
+      'FROM LANCAMENTO_Recarga'
+      'JOIN Tanques ON LANCAMENTO_Recarga.id_tanque = Tanques.id_tanque'
+      'WHERE '
+      '  LANCAMENTO_Recarga.data_hora >= :pData_Inicial '
+      '  AND LANCAMENTO_Recarga.data_hora < :pData_Final'
+      'ORDER BY '
+      '  Tanques.apelido_tanque, '
+      '  LANCAMENTO_Recarga.data_hora')
     Left = 840
     Top = 24
     ParamData = <
