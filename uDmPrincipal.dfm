@@ -73,7 +73,7 @@ object dmPrincipal: TdmPrincipal
         '          LPAD( TRUNC( EXTRACT( SECOND FROM CURRENT_TIMESTAMP ) ' +
         '), 2, '#39'0'#39' )'
       'FROM      rdb$database')
-    Left = 192
+    Left = 152
     Top = 25
   end
   object updTanque: TFDQuery
@@ -189,16 +189,8 @@ object dmPrincipal: TdmPrincipal
   end
   object qryGenerica: TFDQuery
     Connection = FDC
-    Left = 272
+    Left = 240
     Top = 24
-  end
-  object tbAbastecimento: TFDTable
-    Connection = FDC
-    Transaction = FDT
-    UpdateOptions.UpdateTableName = 'LANCAMENTO_ABASTECIMENTO'
-    TableName = 'LANCAMENTO_ABASTECIMENTO'
-    Left = 40
-    Top = 201
   end
   object updLitros: TFDQuery
     Connection = FDC

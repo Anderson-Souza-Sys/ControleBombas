@@ -25,7 +25,6 @@ type
     qryAbastecimentoIMPOSTO_PERC: TFloatField;
     qryAbastecimentoDATA_HORA: TSQLTimeStampField;
     qryAbastecimentoVALOR_IMPOSTO: TFloatField;
-    qryAbastecimentoVALOR_SEM_IMP: TFloatField;
     qryAbastecimentoAPELIDO_BOMBA: TStringField;
     qryAbastecimentoTIPO_COMBUSTIVEL: TStringField;
     qryAbastecimentoAPELIDO_TANQUE: TStringField;
@@ -73,6 +72,7 @@ type
     Label1: TLabel;
     cmbApelidoBomba: TComboBox;
     rlblBomba: TRLLabel;
+    qryAbastecimentoVALOR_LIQUIDO: TFloatField;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure btnGerarRelatorioClick(Sender: TObject);
@@ -128,7 +128,13 @@ begin
     'cast(LANCAMENTO_ABASTECIMENTO.data_hora as date) as DATA, '+
 
     '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) *(lancamento_abastecimento.imposto_perc /100) as Valor_Imposto, '+
-    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) - (LANCAMENTO_ABASTECIMENTO.valor_cobrado *(lancamento_abastecimento.imposto_perc /100)) as Valor_Sem_Imp, '+
+
+    '('+
+    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) '+
+    ' - '+
+    '((LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) * (lancamento_abastecimento.imposto_perc / 100)) '+
+    ') as Valor_Liquido, '+
+
     'LANCAMENTO_ABASTECIMENTO.imposto_perc, LANCAMENTO_ABASTECIMENTO.litros_abastecer, LANCAMENTO_ABASTECIMENTO.data_hora, '+
 
     'Bombas.apelido_bomba,  Tanques.apelido_tanque, Tanques.Tipo_combustivel '+

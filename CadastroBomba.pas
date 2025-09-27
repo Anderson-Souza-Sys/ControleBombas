@@ -52,6 +52,12 @@ begin
   inherited;
   cmbApelidoBombaSelect(Sender);
 
+  if Bomba.Campos.ID_Bomba < 1 then
+  Begin
+    Erro('Bomba para exclusão não foi informada.');
+    Exit;
+  End;{if}
+
   If not Pergunta('Deseja excluir este cadastro?') then
     Exit;{if}
 
@@ -61,6 +67,7 @@ begin
     Exit;
   End;{if}
 
+  cmbApelidoTanque.ItemIndex := 0;
   Tanque.AlimentaListaCombo(cmbApelidoBomba);
   cmbApelidoBomba.ItemIndex := 0;
   cmbApelidoBombaSelect(Sender);
@@ -76,24 +83,31 @@ begin
 
   if Trim(cmbApelidoBomba.Text) = '' Then
   Begin
-    Erro('Informe uma bomba de combustível.');
+    Erro('Informe uma Bomba de Combustível.');
     Exit;
   End;{if}
 
   if Trim(cmbApelidoTanque.Text) = '' Then
   Begin
-    Erro('Informe um tanque de combustível.');
+    Erro('Informe um Tanque de Combustível.');
     Exit;
   End;{if}
 
-  If Bomba.Campos.ID_Tanque < 1 Then
+  if novo then
   Begin
-    Alerta('A Bomba deve estar vinculada a um Tanque');
-    Exit;
-  End;{if}
+    If not Pergunta('Deseja Cadastrar esta Bomba de Combustível?') then
+      Exit;{if}
+  End else
+  Begin
+    if Tanque.Campos.ID_Tanque < 1 then
+    Begin
+      Erro('Bomba de Combustível não identificada para atualizar.');
+      Exit;
+    End;{if}
 
-  If not Pergunta('Deseja gravar este cadastro da Bomba?') then
-    Exit;{if}
+    If not Pergunta('Deseja Atualizar o cadastro desta Bomba de Combustível?') then
+      Exit;{if}
+  End;{if}
 
   Bomba.Campos.Apelido_Bomba := cmbApelidoBomba.Text;
 
@@ -108,13 +122,11 @@ begin
     Exit;
   End;{if}
 
-  if Ok then
-  Begin
-    novo := False;
-    Bomba.AlimentaListaCombo(cmbApelidoBomba);
-    cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;
-    cmbApelidoBombaSelect(Sender);
-  End;{if}
+
+  novo := False;
+  Bomba.AlimentaListaCombo(cmbApelidoBomba);
+  cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;
+  cmbApelidoBombaSelect(Sender);
 end;{procedure}
 
 procedure TfrmCadastroBomba.btnNovoClick(Sender: TObject);
@@ -132,12 +144,18 @@ begin
   if not novo then
   Begin
     if (Trim(cmbApelidoBomba.Text) <> '') and (not Bomba.Localizar(cmbApelidoBomba.Text)) Then
-      Erro(Bomba.Mensagem);{if}
-
-    cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;
-    cmbApelidoTanque.Text := Bomba.Atributos.Apelido_Tanque;
-    lblTipoCombustivel.Caption := Bomba.Atributos.Tipo_Combustivel;
-    lblLitros.Caption := FloatToStrF(Bomba.Atributos.Litros, ffNumber, 10, 3);
+    Begin
+      Erro(Bomba.Mensagem);
+      cmbApelidoTanque.Text := '';
+      lblTipoCombustivel.Caption := '';
+      lblLitros.Caption := '0,000';
+    End Else
+    Begin
+      cmbApelidoBomba.Text := Bomba.Campos.Apelido_Bomba;
+      cmbApelidoTanque.Text := Bomba.Atributos.Apelido_Tanque;
+      lblTipoCombustivel.Caption := Bomba.Atributos.Tipo_Combustivel;
+      lblLitros.Caption := FloatToStrF(Bomba.Atributos.Litros, ffNumber, 10, 3);
+    End;{if}
   End;{if}
 end;{procedure}
 

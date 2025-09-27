@@ -262,12 +262,12 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Transparent = False
       end
       object RLDBResult5: TRLDBResult
-        Left = 562
+        Left = 570
         Top = 6
-        Width = 153
+        Width = 145
         Height = 16
         Alignment = taRightJustify
-        DataField = 'VALOR_SEM_IMP'
+        DataField = 'VALOR_LIQUIDO'
         DataSource = dsAbastecimento
         Font.Charset = ANSI_CHARSET
         Font.Color = clBlack
@@ -384,7 +384,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
           Height = 18
           Alignment = taRightJustify
           AutoSize = False
-          DataField = 'VALOR_SEM_IMP'
+          DataField = 'VALOR_LIQUIDO'
           DataSource = dsAbastecimento
           Font.Charset = DEFAULT_CHARSET
           Font.Color = clBlack
@@ -496,12 +496,12 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         Height = 24
         BandType = btColumnFooter
         object RLDBResult3: TRLDBResult
-          Left = 564
+          Left = 572
           Top = 4
-          Width = 153
+          Width = 145
           Height = 16
           Alignment = taRightJustify
-          DataField = 'VALOR_SEM_IMP'
+          DataField = 'VALOR_LIQUIDO'
           DataSource = dsAbastecimento
           Font.Charset = ANSI_CHARSET
           Font.Color = clBlack
@@ -785,11 +785,16 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
         '  (LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIM' +
         'ENTO.litros_abastecer) *(lancamento_abastecimento.imposto_perc /' +
         '100) as Valor_Imposto,'
+      '  ('
       
         '  (LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIM' +
-        'ENTO.litros_abastecer) - (LANCAMENTO_ABASTECIMENTO.valor_cobrado' +
-        ' *(lancamento_abastecimento.imposto_perc /100)) as Valor_Sem_Imp' +
-        ','
+        'ENTO.litros_abastecer)'
+      '  - '
+      
+        '  ((LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECI' +
+        'MENTO.litros_abastecer) * (lancamento_abastecimento.imposto_perc' +
+        ' / 100))'
+      '  ) as Valor_Liquido,'
       
         '  LANCAMENTO_ABASTECIMENTO.imposto_perc, LANCAMENTO_ABASTECIMENT' +
         'O.litros_abastecer, LANCAMENTO_ABASTECIMENTO.data_hora,'
@@ -822,7 +827,9 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       end
       item
         Name = 'PTANQUE'
+        DataType = ftString
         ParamType = ptInput
+        Size = 30
       end>
     object qryAbastecimentoLITROS_ABASTECER: TFloatField
       FieldName = 'LITROS_ABASTECER'
@@ -855,14 +862,6 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       ReadOnly = True
       DisplayFormat = 'R$ ###,###,##0.00'
     end
-    object qryAbastecimentoVALOR_SEM_IMP: TFloatField
-      AutoGenerateValue = arDefault
-      FieldName = 'VALOR_SEM_IMP'
-      Origin = 'VALOR_SEM_IMP'
-      ProviderFlags = []
-      ReadOnly = True
-      DisplayFormat = 'R$  ###,###,##0.00'
-    end
     object qryAbastecimentoAPELIDO_BOMBA: TStringField
       AutoGenerateValue = arDefault
       FieldName = 'APELIDO_BOMBA'
@@ -891,6 +890,7 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       FieldName = 'VALOR_COBRADO_LITRO'
       Origin = 'VALOR_COBRADO'
       Required = True
+      DisplayFormat = 'R$ #0.00'
     end
     object qryAbastecimentoDATA: TDateField
       AutoGenerateValue = arDefault
@@ -898,6 +898,14 @@ object frmRelatorioAbastecimento: TfrmRelatorioAbastecimento
       Origin = '"DATA"'
       ProviderFlags = []
       ReadOnly = True
+    end
+    object qryAbastecimentoVALOR_LIQUIDO: TFloatField
+      AutoGenerateValue = arDefault
+      FieldName = 'VALOR_LIQUIDO'
+      Origin = 'VALOR_LIQUIDO'
+      ProviderFlags = []
+      ReadOnly = True
+      DisplayFormat = 'R$ #0.00'
     end
   end
   object dsAbastecimento: TDataSource

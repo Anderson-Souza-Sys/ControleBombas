@@ -32,7 +32,6 @@ type
     procedure RelatriodeRecargas1Click(Sender: TObject);
     procedure BitBtn1Click(Sender: TObject);
     procedure FormShow(Sender: TObject);
-    procedure FormCreate(Sender: TObject);
     procedure SairdoSistema1Click(Sender: TObject);
   private
     { Private declarations }

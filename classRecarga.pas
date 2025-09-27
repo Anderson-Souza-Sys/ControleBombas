@@ -121,7 +121,7 @@ Begin
 
     with dmPrincipal.QryGenerica do
     Begin
-      SQL.Text := 'INSERT LANCAMENTO_RECARGA (LITROS_RECARGA, ID_TANQUE) values (:pLitros, :pID)';
+      SQL.Text := 'INSERT INTO LANCAMENTO_RECARGA (LITROS_RECARGA, ID_TANQUE) values (:pLitros, :pID)';
       ParamByName('pLitros').AsFloat := Campos.Litros_Recarga;
       ParamByName('pID').AsInteger := Campos.ID_Tanque;
       ExecSQL;

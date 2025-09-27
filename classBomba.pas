@@ -31,9 +31,9 @@ type
   private
     { Private declarations }
     Function GeraID : Integer;
-    Procedure LimpaCampos;
     Function VerificaSeJaExiste(tambemVerificaLimiteDeBombas : Boolean = true) : Boolean;
     Function IntegridadeReferencial : Boolean;
+    Procedure LimpaCampos;
   public
     { Public declarations }
     Constructor Create;
@@ -81,18 +81,18 @@ Begin
     If qtdBombas >= MAX_BOMBAS_POR_TANQUE then
     Begin
       Result := True;
-      Mensagem := 'Número máximo de '+IntToStr(qtdBombas)+' bombas por tanque.';
+      Mensagem := 'Número máximo de '+IntToStr(qtdBombas)+' Bombas de Combustível por tanque.';
     End Else
     Begin
       sql := Format('select count(*) from Bombas where Apelido_Bomba = %s and ID_Bomba <> %d', [QuotedStr(Campos.Apelido_Bomba), Campos.ID_Bomba]);
       if ExecutarSQLCount(sql) > 0 then
       Begin
-        Mensagem := 'Este apelido para a Bomba já está em uso.';
+        Mensagem := 'Este apelido para a Bomba de Combustível já está em uso.';
         Result := True;
       End;{if}
     End;{if}
   Except on E: Exception do
-    Mensagem := 'Falha dados Bomba '+sLineBreak+E.Message;
+    Mensagem := 'Falha dados Bomba de Combustível '+sLineBreak+E.Message;
   End;{try}
 End;{function}
 
@@ -155,13 +155,13 @@ Begin
       End Else
       Begin
         LimpaCampos;
-        Mensagem := 'Cadastro da bomba não localizado';
+        Mensagem := 'Cadastro da Bomba de Combustível não localizado';
       End;{if}
 
       Close;
     End;{with}
   Except on E: Exception do
-    Mensagem := 'Falha dados Bomba '+sLineBreak+E.Message;
+    Mensagem := 'Falha dados Bomba de Combustível '+sLineBreak+E.Message;
   End;{try}
 End;{function}
 
@@ -180,7 +180,7 @@ begin
 
   if id < 1 then
   begin
-    Mensagem := 'Falha ao gerar ID da bomba.';
+    Mensagem := 'Falha ao gerar ID da Bomba de Combustível.';
     Exit;
   End;{if}
 
@@ -208,13 +208,13 @@ begin
       Result := True;
     Except
       dmPrincipal.FDT.Rollback;
-      Mensagem := 'Falha na gravação dos dados da Bomba!';
+      Mensagem := 'Falha na gravação dos dados da Bomba de Combustível!';
     End;{try}
   except
     on E: Exception do
     begin
       dmPrincipal.FDT.Rollback;
-      Mensagem := 'Falha na gravação da Bomba: ' + E.Message;{if}
+      Mensagem := 'Falha na gravação da Bomba de Combustível: ' + E.Message;{if}
     end;
   end;{try}
 end;{function}
@@ -278,7 +278,7 @@ Begin
         Result := True;
       Except
         dmPrincipal.FDT.Rollback;
-        Mensagem := 'Falha na atualização dos dados da Bomba!';
+        Mensagem := 'Falha na atualização dos dados da Bomba de Combustível!';
       End;{try}
     End;{with}
   Except on E: Exception do
@@ -295,11 +295,11 @@ Begin
 
   try
     sql := Format(
-      'SELECT COUNT(ID_Bomba) AS Qtd FROM Abastecimento WHERE ID_Bomba = %d',
+      'SELECT COUNT(ID_Bomba) AS Qtd FROM Lancamento_Abastecimento WHERE ID_Bomba = %d',
       [Campos.ID_Bomba]);
 
     if ExecutarSQLCount(sql) > 0 then
-      Mensagem := 'Operação não permitida! Há lançamentos de abastecimento vinculados a esta bomba.';{if}
+      Mensagem := 'Operação não permitida! Há lançamentos de abastecimento vinculados a esta Bomba de Combustível.';{if}
 
     if Mensagem = '' then
       Result := True;{if}
@@ -316,6 +316,13 @@ begin
   Mensagem := '';
 
   try
+    if Campos.ID_Bomba < 1 then
+    Begin
+      Mensagem := 'Bomba para exclusão não foi informada.';
+      Exit;
+    End;{if}
+
+
     if not IntegridadeReferencial then
       Exit;{if}
 
@@ -328,6 +335,7 @@ begin
       try
         ExecSQL;
         dmPrincipal.FDT.Commit;
+        LimpaCampos;
         Result := True;
       except
         on E: Exception do

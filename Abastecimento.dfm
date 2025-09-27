@@ -13,7 +13,7 @@ object frmAbastecimento: TfrmAbastecimento
   Font.Name = 'Tahoma'
   Font.Style = []
   OldCreateOrder = False
-  Position = poScreenCenter
+  Position = poDesigned
   Visible = True
   OnClose = FormClose
   OnShow = FormShow
@@ -22,12 +22,12 @@ object frmAbastecimento: TfrmAbastecimento
   object Label1: TLabel
     Left = 19
     Top = 17
-    Width = 43
-    Height = 16
+    Width = 50
+    Height = 18
     Caption = 'Bomba'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -35,12 +35,12 @@ object frmAbastecimento: TfrmAbastecimento
   object Label2: TLabel
     Left = 19
     Top = 89
-    Width = 108
-    Height = 16
+    Width = 128
+    Height = 18
     Caption = 'Tipo Combust'#237'vel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -48,12 +48,12 @@ object frmAbastecimento: TfrmAbastecimento
   object Label3: TLabel
     Left = 19
     Top = 152
-    Width = 119
-    Height = 16
+    Width = 135
+    Height = 18
     Caption = 'Litros a abastecer'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -61,12 +61,12 @@ object frmAbastecimento: TfrmAbastecimento
   object lblTipoCombustivel: TLabel
     Left = 19
     Top = 111
-    Width = 107
-    Height = 16
+    Width = 118
+    Height = 18
     Caption = 'lblTipoCombustivel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -74,12 +74,12 @@ object frmAbastecimento: TfrmAbastecimento
   object Label4: TLabel
     Left = 180
     Top = 89
-    Width = 116
-    Height = 16
+    Width = 136
+    Height = 18
     Caption = 'Valor Combust'#237'vel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -87,12 +87,12 @@ object frmAbastecimento: TfrmAbastecimento
   object lblValorCombustivel: TLabel
     Left = 180
     Top = 111
-    Width = 112
-    Height = 16
+    Width = 122
+    Height = 18
     Caption = 'lblValorCombustivel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -100,12 +100,12 @@ object frmAbastecimento: TfrmAbastecimento
   object Label5: TLabel
     Left = 180
     Top = 152
-    Width = 70
-    Height = 16
+    Width = 82
+    Height = 18
     Caption = 'Valor Total'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -113,12 +113,12 @@ object frmAbastecimento: TfrmAbastecimento
   object lblValorTotal: TLabel
     Left = 180
     Top = 179
-    Width = 72
-    Height = 16
+    Width = 77
+    Height = 18
     Caption = 'lblValorTotal'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -126,11 +126,11 @@ object frmAbastecimento: TfrmAbastecimento
   object cmbApelidoBomba: TComboBox
     Left = 19
     Top = 39
-    Width = 318
-    Height = 24
+    Width = 326
+    Height = 26
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = [fsBold]
     ParentFont = False
@@ -142,10 +142,10 @@ object frmAbastecimento: TfrmAbastecimento
     Left = 19
     Top = 176
     Width = 135
-    Height = 24
+    Height = 26
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clWindowText
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False

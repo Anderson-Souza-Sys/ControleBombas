@@ -52,6 +52,12 @@ begin
   inherited;
   cmbApelidoTanqueSelect(Sender);
 
+  if Tanque.Campos.ID_Tanque < 1 then
+  Begin
+    Erro('Tanque para exclusão não foi informado.');
+    Exit;
+  End;{if}
+
   If Pergunta('Deseja excluir este cadastro?') then
     If Tanque.Excluir Then
     Begin
@@ -83,6 +89,12 @@ begin
       Exit;{if}
   End else
   Begin
+    if Tanque.Campos.ID_Tanque < 1 then
+    Begin
+      Erro('Tanque de Combustível não foi identificado para atualizar.');
+      Exit;
+    End;{if}
+
     If not Pergunta('Deseja Atualizar o cadastro deste Tanque?') then
       Exit;{if}
   End;{if}
@@ -102,10 +114,10 @@ begin
     Exit;
   End;{if}
 
+  novo := False;
   Tanque.AlimentaListaCombo(cmbApelidoTanque);
   cmbApelidoTanque.Text := Tanque.Campos.Apelido_Tanque;
   cmbApelidoTanqueSelect(Sender);
-  novo := False;
 end;{procedure}
 
 procedure TfrmCadastroTanque.btnNovoClick(Sender: TObject);
@@ -121,12 +133,18 @@ begin
   if not novo then
   Begin
     if (Trim(cmbApelidoTanque.Text) <> '') and (not Tanque.Localizar(cmbApelidoTanque.Text)) Then
-      Erro(Tanque.Mensagem);{if}
-
-    cmbApelidoTanque.Text := Tanque.Campos.Apelido_Tanque;
-    edtTipoCombustivel.Text := Tanque.Campos.Tipo_Combustivel;
-    edtLitros.Text := FloatToStrF(Tanque.Campos.Litros, ffNumber, 10, 3);
-    edtValorCombustivel.Text := FloatToStrF(Tanque.Campos.Valor_Combustivel, ffNumber, 10, 2);
+    Begin
+      Erro(Tanque.Mensagem);
+      edtTipoCombustivel.Text := ' ';
+      edtLitros.Text := '0,000';
+      edtValorCombustivel.Text := '0,00';
+    End Else
+    Begin
+      cmbApelidoTanque.Text := Tanque.Campos.Apelido_Tanque;
+      edtTipoCombustivel.Text := Tanque.Campos.Tipo_Combustivel;
+      edtLitros.Text := FloatToStrF(Tanque.Campos.Litros, ffNumber, 10, 3);
+      edtValorCombustivel.Text := FloatToStrF(Tanque.Campos.Valor_Combustivel, ffNumber, 10, 2);
+    End;{if}
   End;{if}
 end;{procedure}
 

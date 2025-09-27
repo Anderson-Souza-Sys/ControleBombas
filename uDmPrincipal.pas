@@ -24,7 +24,6 @@ type
     updBomba: TFDQuery;
     delBomba: TFDQuery;
     qryGenerica: TFDQuery;
-    tbAbastecimento: TFDTable;
     updLitros: TFDQuery;
     qryBomba: TFDQuery;
   private

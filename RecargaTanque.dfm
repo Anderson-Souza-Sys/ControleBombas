@@ -7,26 +7,38 @@ inherited frmRecargaTanque: TfrmRecargaTanque
   object Label1: TLabel [0]
     Left = 16
     Top = 16
-    Width = 109
-    Height = 16
+    Width = 127
+    Height = 18
     Caption = 'Tanque (apelido)'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object Label2: TLabel [1]
     Left = 16
     Top = 98
-    Width = 108
-    Height = 16
+    Width = 128
+    Height = 18
     Caption = 'Tipo Combust'#237'vel'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object lblTipoCombustivel: TLabel [2]
     Left = 16
     Top = 123
-    Width = 107
-    Height = 16
+    Width = 118
+    Height = 18
     Caption = 'lblTipoCombustivel'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -34,19 +46,25 @@ inherited frmRecargaTanque: TfrmRecargaTanque
   object Label3: TLabel [3]
     Left = 184
     Top = 98
-    Width = 108
-    Height = 16
+    Width = 124
+    Height = 18
     Caption = 'Litros no Tanque'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   object lblLitros: TLabel [4]
     Left = 184
     Top = 123
-    Width = 44
-    Height = 16
+    Width = 46
+    Height = 18
     Caption = 'lblLitros'
     Font.Charset = DEFAULT_CHARSET
     Font.Color = clBlue
-    Font.Height = -13
+    Font.Height = -15
     Font.Name = 'Tahoma'
     Font.Style = []
     ParentFont = False
@@ -54,9 +72,15 @@ inherited frmRecargaTanque: TfrmRecargaTanque
   object Label5: TLabel [5]
     Left = 16
     Top = 162
-    Width = 91
-    Height = 16
+    Width = 109
+    Height = 18
     Caption = 'Litros a incluir'
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
   end
   inherited Panel1: TPanel
     inherited btnNovo: TBitBtn
@@ -80,8 +104,14 @@ inherited frmRecargaTanque: TfrmRecargaTanque
   object cmbApelidoTanque: TComboBox
     Left = 16
     Top = 38
-    Width = 318
-    Height = 24
+    Width = 337
+    Height = 26
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 1
     Text = 'cmbApelidoTanque'
     OnSelect = cmbApelidoTanqueSelect
@@ -90,7 +120,13 @@ inherited frmRecargaTanque: TfrmRecargaTanque
     Left = 16
     Top = 192
     Width = 121
-    Height = 24
+    Height = 26
+    Font.Charset = DEFAULT_CHARSET
+    Font.Color = clWindowText
+    Font.Height = -15
+    Font.Name = 'Tahoma'
+    Font.Style = [fsBold]
+    ParentFont = False
     TabOrder = 2
     Text = '0,000'
     OnExit = edtLitrosIncluirExit

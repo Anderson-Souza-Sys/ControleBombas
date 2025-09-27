@@ -15,7 +15,6 @@ object frmPrincipal: TfrmPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
-  OnCreate = FormCreate
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 13

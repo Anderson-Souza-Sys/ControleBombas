@@ -22,9 +22,9 @@ type
   private
     { Private declarations }
     Function GeraID : Integer;
-    Procedure LimpaCampos;
     Function AutorizaGravar : Boolean;
     Function IntegridadeReferencial : Boolean;
+    Procedure LimpaCampos;
   public
     { Public declarations }
     Constructor Create;
@@ -342,6 +342,12 @@ Begin
   Mensagem := '';
 
   Try
+    if Campos.ID_Tanque < 1 then
+    Begin
+      Mensagem := 'Tanque para exclusão não foi informado.';
+      Exit;
+    End;{if}
+
     If not IntegridadeReferencial Then
       Exit;{if}
 
@@ -354,6 +360,7 @@ Begin
 
       Try
         dmPrincipal.FDT.Commit;
+        LimpaCampos;
         Result := True;
       Except
         dmPrincipal.FDT.Rollback;

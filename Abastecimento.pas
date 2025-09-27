@@ -55,6 +55,9 @@ begin
     Exit;
   End;{if}
 
+  if not Pergunta('Confirma o abastecimento?')  then
+    Exit;{if}
+
   Abastecimento := TAbastecimentos.Create;
 
   Try
@@ -98,6 +101,8 @@ var
   valores : Array[1..2] of String;
 begin
   edtLitros.Text := FormataValor(edtLitros.Text, 3);
+  cmbApelidoBombaSelect(Sender);
+  Application.ProcessMessages;
 
   lblValorTotal.Caption := MultiplicaDoisValoresStr([edtLitros.Text, lblValorCombustivel.Caption], 2, True);
 end;{procedure}
@@ -117,6 +122,9 @@ end;{procedure}
 
 procedure TfrmAbastecimento.FormShow(Sender: TObject);
 begin
+  frmAbastecimento.Top := 100;
+  frmAbastecimento.Left := (Screen.Width - frmAbastecimento.Width) div 2;
+
   edtLitros.Text := '0,000';
   lblValorCombustivel.Caption := '0,00';
   lblValorTotal.Caption := '0,00';
