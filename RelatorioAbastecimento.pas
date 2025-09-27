@@ -123,51 +123,59 @@ begin
   DataHora(True);
 
   qryAbastecimento.SQL.Text :=
-    'select LANCAMENTO_ABASTECIMENTO.litros_abastecer, LANCAMENTO_ABASTECIMENTO.valor_cobrado AS valor_cobrado_litro, '+
-    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) AS valor_cobrado, '+
-    'cast(LANCAMENTO_ABASTECIMENTO.data_hora as date) as DATA, '+
+  'SELECT ' +
+  '  dados.litros_abastecer, ' +
+  '  dados.valor_cobrado_litro, ' +
+  '  dados.valor_cobrado, ' +
+  '  dados.DATA, ' +
+  '  dados.Valor_Imposto, ' +
+  '  (dados.valor_cobrado - dados.Valor_Imposto) AS Valor_Liquido, ' +
+  '  dados.imposto_perc, ' +
+  '  dados.data_hora, ' +
+  '  Bombas.apelido_bomba, ' +
+  '  Tanques.apelido_tanque, ' +
+  '  Tanques.Tipo_combustivel ' +
 
-    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) *(lancamento_abastecimento.imposto_perc /100) as Valor_Imposto, '+
+  'FROM ( ' +
+  '  SELECT ' +
+  '    LA.litros_abastecer, ' +
+  '    LA.valor_cobrado AS valor_cobrado_litro, ' +
+  '    (LA.valor_cobrado * LA.litros_abastecer) AS valor_cobrado, ' +
+  '    CAST(LA.data_hora AS DATE) AS DATA, ' +
+  '    (LA.valor_cobrado * LA.litros_abastecer) * (LA.imposto_perc / 100) AS Valor_Imposto, ' +
+  '    LA.imposto_perc, ' +
+  '    LA.data_hora, ' +
+  '    LA.ID_BOMBA ' +
+  '  FROM LANCAMENTO_ABASTECIMENTO LA ' +
+  '  WHERE LA.data_hora >= :pData_Inicial ' +
+  '    AND LA.data_hora < :pData_Final ' +
+  ') dados ' +
 
-    '('+
-    '(LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) '+
-    ' - '+
-    '((LANCAMENTO_ABASTECIMENTO.valor_cobrado * LANCAMENTO_ABASTECIMENTO.litros_abastecer) * (lancamento_abastecimento.imposto_perc / 100)) '+
-    ') as Valor_Liquido, '+
+  'JOIN Bombas ON dados.ID_BOMBA = Bombas.ID_Bomba ' +
+  'JOIN Tanques ON Bombas.id_Tanque = Tanques.id_tanque ';
 
-    'LANCAMENTO_ABASTECIMENTO.imposto_perc, LANCAMENTO_ABASTECIMENTO.litros_abastecer, LANCAMENTO_ABASTECIMENTO.data_hora, '+
-
-    'Bombas.apelido_bomba,  Tanques.apelido_tanque, Tanques.Tipo_combustivel '+
-
-    'from LANCAMENTO_ABASTECIMENTO, Bombas, Tanques '+
-
-    'where lancamento_abastecimento.data_hora >= :pData_Inicial and lancamento_abastecimento.data_hora < :pData_Final and '+
-    'LANCAMENTO_ABASTECIMENTO.ID_BOMBA = Bombas.ID_Bomba and '+
-    'Bombas.id_Tanque = Tanques.id_tanque ';
-
-  If Trim(cmbApelidoBomba.Text) <> '<TODAS>' then
-  Begin
-    qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text + 'and Bombas.apelido_bomba = '+QuotedStr(Trim(cmbApelidoBomba.Text));
+  if Trim(cmbApelidoBomba.Text) <> '<TODAS>' then
+  begin
+    qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
+      'AND Bombas.apelido_bomba = ' + QuotedStr(Trim(cmbApelidoBomba.Text));
     listandoBomba := Trim(cmbApelidoBomba.Text);
-  End Else
+  end else
     listandoBomba := '';{if}
 
+
   case rgAgrupar.ItemIndex of
-    0 :
-    Begin
+    0:
+    begin
       qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
-      'order by Bombas.apelido_bomba, lancamento_abastecimento.data_hora';
-
+        ' ORDER BY Bombas.apelido_bomba, dados.data_hora';
       RLGroupAgrupador.DataFields := 'APELIDO_BOMBA';
-
-    End;
-    1 :
-    Begin
+    end;
+    1:
+    begin
       qryAbastecimento.SQL.Text := qryAbastecimento.SQL.Text +
-      'order by lancamento_abastecimento.data_hora, Bombas.apelido_bomba';
-
+        ' ORDER BY dados.data_hora, Bombas.apelido_bomba';
       RLGroupAgrupador.DataFields := 'DATA';
-    End;
+    end;
   end;{case}
 
   ordem := rgAgrupar.ItemIndex;
