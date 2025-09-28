@@ -12,7 +12,7 @@ Este é um sistema de cadastro e controle de bombas de combustível, criado com 
 
 - Orientação a Objetos
 - Acesso a banco de dados
-- Componentes visuais (VCL)
+- Componentes visuais
 - Tratamento de erros global
 - Boas práticas de UX voltadas à VCL Delphi
 - Padrão de desenvolvimento com formulários herdados (inherited)
@@ -22,7 +22,7 @@ Este é um sistema de cadastro e controle de bombas de combustível, criado com 
 
 ## 🛠 Tecnologias Utilizadas
 
-- **Delphi XE8**
+- **Delphi RAD Studio, FireDAC/VCL.**
 - **Firebird SQL**
 - **Fortes Report** [download](https://github.com/fortesinformatica/fortesreport-ce/tree/master)
 - VCL (Visual Component Library)
