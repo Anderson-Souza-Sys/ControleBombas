@@ -41,7 +41,7 @@ implementation
 
 {$R *.dfm}
 
-uses uGlobal, classAbastecimento;
+uses uFuncoesGerais, classAbastecimento;
 
 procedure TfrmAbastecimento.btnAbastecerClick(Sender: TObject);
 var

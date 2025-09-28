@@ -42,7 +42,7 @@ implementation
 
 {$R *.dfm}
 
-uses uGlobal, Principal;
+uses uBancoUtils, Principal;
 
 procedure TfrmConfiguraBanco.btnTreeClick(Sender: TObject);
 begin

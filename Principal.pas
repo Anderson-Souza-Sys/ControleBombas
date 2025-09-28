@@ -10,7 +10,7 @@ uses
 type
   TfrmPrincipal = class(TForm)
     stbPrincipal: TStatusBar;
-    MainMenu1: TMainMenu;
+    MainMenuPrincipal: TMainMenu;
     Bombas1: TMenuItem;
     anque1: TMenuItem;
     CadastroTanque1: TMenuItem;
@@ -54,8 +54,9 @@ implementation
 
 {$R *.dfm}
 
-uses ConfiguraBanco, uDmPrincipal, CadastroTanque, uGlobal, RecargaTanque,
-  CadastroBomba, Abastecimento, RelatorioAbastecimento, RelatorioRecarga;
+uses ConfiguraBanco, uDmPrincipal, CadastroTanque, RecargaTanque,
+  CadastroBomba, Abastecimento, RelatorioAbastecimento, RelatorioRecarga,
+  uBancoUtils, uConfiguracaoSistema, uFuncoesGerais;
 
 procedure TfrmPrincipal.TrataRetornoErro(sErro : string);
 begin
@@ -128,7 +129,7 @@ begin
     Application.Title := NOME_EMPRESA;
     Application.ProcessMessages;
 
-    ConfigPaths;
+    ConfigPaths('C:\ProgramData\CFGProjetoSistemaControleBombas\');
 
     Application.OnException := EventoErro;
     Application.OnHint := DisplayHint;

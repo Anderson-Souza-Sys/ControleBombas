@@ -39,7 +39,7 @@ end;{type}
 
 implementation
 
-uses uDmPrincipal, uGlobal;
+uses uDmPrincipal, uBancoUtils;
 
 Constructor TTanques.Create;
 Begin

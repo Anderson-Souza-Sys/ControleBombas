@@ -40,7 +40,7 @@ end;{type}
 
 implementation
 
-uses uDmPrincipal, uGlobal, classTanque;
+uses uDmPrincipal, uBancoUtils, classTanque;
 
 Constructor TRecargas.Create;
 Begin
@@ -140,4 +140,3 @@ Begin
 End;{function}
 
 end.
-

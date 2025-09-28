@@ -45,7 +45,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmPrincipal, uGlobal;
+uses uDmPrincipal, uFuncoesGerais;
 
 procedure TfrmCadastroTanque.btnExcluirClick(Sender: TObject);
 begin

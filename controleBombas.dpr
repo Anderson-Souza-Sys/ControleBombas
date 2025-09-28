@@ -2,11 +2,13 @@ program controleBombas;
 
 uses
   Vcl.Forms,
+  uBancoUtils in 'uBancoUtils.pas',
+  uFuncoesGerais in 'uFuncoesGerais.pas',
+  uConfiguracaoSistema in 'uConfiguracaoSistema.pas',  
   Principal in 'Principal.pas' {frmPrincipal},
   BaseInheritable in 'Inheritable Forms\BaseInheritable.pas' {frmbaseInheritable},
   CadastroInheritable in 'Inheritable Forms\CadastroInheritable.pas' {frmCadastroInheritable},
   ConfiguraBanco in 'ConfiguraBanco.pas' {frmConfiguraBanco},
-  uGlobal in 'uGlobal.pas',
   uDmPrincipal in 'uDmPrincipal.pas' {dmPrincipal: TDataModule},
   CadastroTanque in 'CadastroTanque.pas' {frmCadastroTanque},
   RecargaTanque in 'RecargaTanque.pas' {frmRecargaTanque},
@@ -25,7 +27,7 @@ begin
   Application.Initialize;
   Application.MainFormOnTaskbar := True;
   Application.Title := 'Controle de Bombas';
-    Application.CreateForm(TdmPrincipal, dmPrincipal);
-    Application.CreateForm(TfrmPrincipal, frmPrincipal);    
+  Application.CreateForm(TdmPrincipal, dmPrincipal);
+  Application.CreateForm(TfrmPrincipal, frmPrincipal);
   Application.Run;
 end.

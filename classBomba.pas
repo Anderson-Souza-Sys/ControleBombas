@@ -47,7 +47,7 @@ end;{type}
 
 implementation
 
-uses uDmPrincipal, uGlobal;
+uses uDmPrincipal, uBancoUtils, uConfiguracaoSistema;
 
 Constructor TBombas.Create;
 Begin

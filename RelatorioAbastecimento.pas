@@ -109,7 +109,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmPrincipal, uGlobal;
+uses uDmPrincipal, uFuncoesGerais, uBancoUtils;
 
 procedure TfrmRelatorioAbastecimento.btnFecharClick(Sender: TObject);
 begin

@@ -43,7 +43,7 @@ end;{type}
 
 implementation
 
-uses uDmPrincipal, uGlobal, classTanque;
+uses uDmPrincipal, uBancoUtils, uConfiguracaoSistema, classTanque;
 
 Constructor TAbastecimentos.Create;
 Begin

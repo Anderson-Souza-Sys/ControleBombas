@@ -27,8 +27,8 @@
     <Transaction>2022/10/19 15:14:26.000.033,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Inheritable Forms\uBaseInheritable.pas</Transaction>
     <Transaction>2022/10/19 15:14:26.000.033,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.dfm=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Inheritable Forms\uBaseInheritable.dfm</Transaction>
     <Transaction>2022/10/19 15:18:19.000.876,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas</Transaction>
-    <Transaction>2022/10/19 15:19:00.000.352,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Inheritable Forms\uCadastroInheritable.pas</Transaction>
     <Transaction>2022/10/19 15:19:00.000.352,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.dfm=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Inheritable Forms\uCadastroInheritable.dfm</Transaction>
+    <Transaction>2022/10/19 15:19:00.000.352,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Inheritable Forms\uCadastroInheritable.pas</Transaction>
     <Transaction>2022/10/19 16:04:37.000.583,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas</Transaction>
     <Transaction>2022/10/19 16:06:33.000.281,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.dfm=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\uCadastroTanque.dfm</Transaction>
     <Transaction>2022/10/19 16:06:33.000.281,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\uCadastroTanque.pas</Transaction>
@@ -64,9 +64,12 @@
     <Transaction>2022/10/22 17:15:57.000.351,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.dfm=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Abastecimento.dfm</Transaction>
     <Transaction>2022/10/22 17:33:23.000.978,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\classAbastecimento.pas</Transaction>
     <Transaction>2022/10/22 22:39:28.000.360,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas</Transaction>
-    <Transaction>2022/10/22 22:48:57.000.033,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\RelatorioAbastecimento.pas</Transaction>
     <Transaction>2022/10/22 22:48:57.000.033,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.dfm=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\RelatorioAbastecimento.dfm</Transaction>
+    <Transaction>2022/10/22 22:48:57.000.033,C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\Unit1.pas=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\RelatorioAbastecimento.pas</Transaction>
     <Transaction>2022/10/23 15:38:59.000.720,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\RelatorioRecarga.pas</Transaction>
     <Transaction>2022/10/23 17:05:43.000.100,=C:\Users\Souza\Documents\Programa\Delphi\ControleBombas\classRecarga.pas</Transaction>
+    <Transaction>2025/09/27 20:57:29.000.094,=C:\Users\souza\Documents\Programa\Delphi\ControleBombas\uFuncoesGerais.pas</Transaction>
+    <Transaction>2025/09/27 20:57:29.000.076,=C:\Users\souza\Documents\Programa\Delphi\ControleBombas\uConfiguracaoSistema.pas</Transaction>
+    <Transaction>2025/09/27 20:57:29.000.044,=C:\Users\souza\Documents\Programa\Delphi\ControleBombas\uBancoUtils.pas</Transaction>
   </Transactions>
 </BorlandProject>

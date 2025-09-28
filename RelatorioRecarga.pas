@@ -75,7 +75,7 @@ implementation
 
 {$R *.dfm}
 
-uses uDmPrincipal, uGlobal;
+uses uDmPrincipal, uFuncoesGerais, uBancoUtils;
 
 procedure TfrmRelatorioRecarga.btnFecharClick(Sender: TObject);
 begin

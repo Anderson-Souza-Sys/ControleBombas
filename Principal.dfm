@@ -11,7 +11,7 @@ object frmPrincipal: TfrmPrincipal
   Font.Name = 'Tahoma'
   Font.Style = []
   FormStyle = fsMDIForm
-  Menu = MainMenu1
+  Menu = MainMenuPrincipal
   OldCreateOrder = False
   WindowState = wsMaximized
   OnCloseQuery = FormCloseQuery
@@ -31,8 +31,8 @@ object frmPrincipal: TfrmPrincipal
         Width = 50
       end>
   end
-  object MainMenu1: TMainMenu
-    Left = 32
+  object MainMenuPrincipal: TMainMenu
+    Left = 40
     Top = 24
     object Abastecimento1: TMenuItem
       Caption = '&Abastecimento'
