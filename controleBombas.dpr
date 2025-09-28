@@ -4,7 +4,7 @@ uses
   Vcl.Forms,
   uBancoUtils in 'uBancoUtils.pas',
   uFuncoesGerais in 'uFuncoesGerais.pas',
-  uConfiguracaoSistema in 'uConfiguracaoSistema.pas',  
+  uConfiguracaoSistema in 'uConfiguracaoSistema.pas',
   Principal in 'Principal.pas' {frmPrincipal},
   BaseInheritable in 'Inheritable Forms\BaseInheritable.pas' {frmbaseInheritable},
   CadastroInheritable in 'Inheritable Forms\CadastroInheritable.pas' {frmCadastroInheritable},
@@ -18,8 +18,7 @@ uses
   Abastecimento in 'Abastecimento.pas' {frmAbastecimento},
   classAbastecimento in 'classAbastecimento.pas',
   RelatorioAbastecimento in 'RelatorioAbastecimento.pas' {frmRelatorioAbastecimento},
-  RelatorioRecarga in 'RelatorioRecarga.pas' {frmRelatorioRecarga},
-  classRecarga in 'classRecarga.pas';
+  RelatorioRecarga in 'RelatorioRecarga.pas' {frmRelatorioRecarga};
 
 {$R *.res}
 
