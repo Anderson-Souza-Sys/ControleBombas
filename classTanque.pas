@@ -55,17 +55,27 @@ End;{destructor}
 Function TTanques.AutorizaGravar : Boolean;
 var
   sql : String;
+  qtdTanques : Integer;
 Begin
   Mensagem := '';
   Result := false;
 
   try
     sql := Format('select count(*) from Tanques where Apelido_Tanque = %s and ID_Tanque <> %d', [QuotedStr(Campos.Apelido_Tanque), Campos.ID_Tanque]);
-    if ExecutarSQLCount(sql) > 0 then
+
+    qtdTanques := ExecutarSQLCount(sql);
+
+   if qtdTanques < 0 then
+    Begin
+      Mensagem := 'Erro Processamento.';
+      Exit;
+    End;{if}
+
+    if qtdTanques > 0 then
     Begin
       Mensagem := 'Este apelido para o Tanque já está em uso.';
       Exit;
-    End;{id}
+    End;{if}
 
     Result := True;
 
@@ -306,6 +316,7 @@ End;{function}
 Function TTanques.IntegridadeReferencial : Boolean;
 var
   sql : string;
+  qtd : Integer;
 Begin
   Result := False;
   Mensagem := '';
@@ -315,14 +326,30 @@ Begin
       'SELECT COUNT(ID_Tanque) AS Qtd FROM Bombas WHERE ID_Tanque = %d',
       [Campos.ID_Tanque]);
 
-    if ExecutarSQLCount(sql) > 0 then
+    qtd := ExecutarSQLCount(sql);
+
+    if qtd < 0 then
+    Begin
+      Mensagem := 'Erro Processamento.';
+      Exit;
+    End;{if}
+
+    if qtd > 0 then
       Mensagem := '- Compromete a integridade referencal com Cadastro de Bombas.'+sLineBreak;{if}
 
     sql := Format(
       'SELECT COUNT(ID_Tanque) AS Qtd FROM LANCAMENTO_RECARGA WHERE ID_Tanque = %d',
       [Campos.ID_Tanque]);
 
-    if ExecutarSQLCount(sql) > 0 then
+    qtd := ExecutarSQLCount(sql);
+
+    if qtd < 0 then
+    Begin
+      Mensagem := 'Erro Processamento.';
+      Exit;
+    End;{if}
+
+    if qtd > 0 then
       Mensagem := Mensagem + '- Compromete a integridade referencal com Lançamentos de Recarga.';{if}
 
     if Mensagem = '' then

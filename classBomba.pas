@@ -75,6 +75,12 @@ Begin
       [Campos.ID_Tanque, Campos.ID_Bomba]);
 
       qtdBombas := ExecutarSQLCount(sql);
+
+      if qtdBombas < 0 then
+      Begin
+        Mensagem := 'Erro processamento.';
+        Exit;
+      End;{if}
     End Else
       qtdBombas := 0;{if}
 
@@ -85,7 +91,16 @@ Begin
     End Else
     Begin
       sql := Format('select count(*) from Bombas where Apelido_Bomba = %s and ID_Bomba <> %d', [QuotedStr(Campos.Apelido_Bomba), Campos.ID_Bomba]);
-      if ExecutarSQLCount(sql) > 0 then
+
+      qtdBombas := ExecutarSQLCount(sql);
+
+      if qtdBombas < 0 then
+      Begin
+        Mensagem := 'Erro processamento.';
+        Exit;
+      End;{if}
+
+      if qtdBombas > 0 then
       Begin
         Mensagem := 'Este apelido para a Bomba de Combustível já está em uso.';
         Result := True;
@@ -288,6 +303,7 @@ End;{function}
 
 Function TBombas.IntegridadeReferencial : Boolean;
 var
+  qtdLancamentos : Integer;
   sql : string;
 Begin
   Result := False;
@@ -298,7 +314,12 @@ Begin
       'SELECT COUNT(ID_Bomba) AS Qtd FROM Lancamento_Abastecimento WHERE ID_Bomba = %d',
       [Campos.ID_Bomba]);
 
-    if ExecutarSQLCount(sql) > 0 then
+    qtdLancamentos := ExecutarSQLCount(sql);
+
+    if qtdLancamentos < 0 then
+      Mensagem := 'Erro processamento.';{if}
+
+    if qtdLancamentos > 0 then
       Mensagem := 'Operação não permitida! Há lançamentos de abastecimento vinculados a esta Bomba de Combustível.';{if}
 
     if Mensagem = '' then
